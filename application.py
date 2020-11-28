@@ -74,14 +74,14 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route("/chat", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def chat():
 
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("chat.html", username=current_user.username, rooms=ROOMS)
+    return render_template("home.html", username=current_user.username, rooms=ROOMS)
 
 
 @app.errorhandler(404)
