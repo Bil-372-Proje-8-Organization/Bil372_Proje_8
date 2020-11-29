@@ -2,7 +2,7 @@ import os
 import time
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
-from flask_socketio import SocketIO, join_room, leave_room, send
+#from flask_socketio import SocketIO, join_room, leave_room, send
 
 from wtform_fields import *
 from models import *
@@ -26,9 +26,8 @@ login.init_app(app)
 def load_user(id):
     return User.query.get(int(id))
 
-socketio = SocketIO(app, manage_session=False)
-
-ROOMS = ["lounge", "news", "games", "coding"]
+#socketio = SocketIO(app, manage_session=False)
+#ROOMS = ["lounge", "news", "games", "coding"]
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -81,7 +80,7 @@ def chat():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("home.html", username=current_user.username, rooms=ROOMS)
+    return render_template("home.html", username=current_user.username, rooms="")
 
 
 @app.errorhandler(404)
