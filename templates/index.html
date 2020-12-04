@@ -9,8 +9,8 @@
 
         <form action="{{ url_for('index') }}", method="POST">
             {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
-            {{ displayField(form.hashed_pswd, 'hashed_pswd') }}
-            {{ displayField(form.confirm_pswd, 'Retype hashed_pswd') }}
+            {{ displayField(form.hashed_pswd, 'Password') }}
+            {{ displayField(form.confirm_pswd, 'Confirm password') }}
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-warning">
             </div>
