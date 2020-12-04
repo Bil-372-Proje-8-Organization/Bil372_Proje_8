@@ -78,21 +78,21 @@
                 <table class="table table-hover" style="margin-top:50px;">
                     <thead>
                       <tr>
-                        <th scope="col">kullanici_id</th>
-                        <th scope="col">soyad</th>
-                        <th scope="col">ad</th>
-                        <th scope="col">il</th>
-                        <th scope="col">ilce</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">City</th>
+                        <th scope="col">District</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {%for kullanici in kullanici%}
+                    {%for users_info in users_info%}
                         <tr>
-                            <th scope="row">{{kullanici.kullanici_id}}</th>
-                            <td>{{kullanici.soyad}}</td>
-                            <td>{{kullanici.ad}}</td>
-                            <td>{{kullanici.il}}</td>
-                            <td>{{advert.ilce}}</td>
+                            <th scope="row">{{users_info.user_id}}</th>
+                            <td>{{users_info.surname}}</td>
+                            <td>{{users_info.name}}</td>
+                            <td>{{users_info.city}}</td>
+                            <td>{{users_info.district}}</td>
                         </tr>
                     {%endfor%}
                     </tbody>
