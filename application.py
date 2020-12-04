@@ -2,6 +2,7 @@ import os
 import time
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
+from sqlalchemy import select
 #from flask_socketio import SocketIO, join_room, leave_room, send
 
 from wtform_fields import *
@@ -17,10 +18,12 @@ app.config['WTF_CSRF_SECRET_KEY'] = "b'f\xfa\x8b{X\x8b\x9eM\x83l\x19\xad\x84\x08
 app.config['SQLALCHEMY_DATABASE_URI']= 'postgres://heqvalntzxdxvf:b86b019f8813b8316172a0af55578c01763592f5bb4f242ab577fb5c7616f0dc@ec2-50-17-197-184.compute-1.amazonaws.com:5432/d6uhfb7evc3bsm'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
+conn=db.engine.connect()
 # Initialize login manager
 login = LoginManager(app)
 login.init_app(app)
+
+Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
 
 @login.user_loader
 def load_user(id):
@@ -79,8 +82,8 @@ def chat():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
-
-    return render_template("home.html", username=current_user.username, rooms="")
+    
+    return render_template("home.html", username=current_user.username, rooms="" , adverts=db.session.query(Advert).all())
 
 
 @app.errorhandler(404)
