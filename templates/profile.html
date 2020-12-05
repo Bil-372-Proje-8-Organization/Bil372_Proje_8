@@ -74,25 +74,33 @@
             <div >
                 <table class="table table-hover" style="margin-top:50px;">
                     <thead>
+                    <tr>
+                      <th scope="col">User ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Surname</th>
+                      <th scope="col">city</th>
+                      <th scope="col">District</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Mail</th>
+                      <th scope="col">Score</th>
+                      <th scope="col">username</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {%for Users_info in Users_info%}
                       <tr>
-                        <th scope="col">User ID</th>
-                        <th scope="col">Surname</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">City</th>
-                        <th scope="col">District</th>
+                          <th scope="row">{{Users_info.users_id}}</th>
+                          <td>{{Users_info.name}}</td>
+                          <td>{{Users_info.surname}}</td>
+                          <td>{{Users_info.city}}</td>
+                          <td>{{Users_info.district}}</td>
+                          <td>{{Users_info.phone}}</td>
+                          <td>{{Users_info.mail}}</td>
+                          <td>{{Users_info.score}}</td>
+                          <td>{{Users_info.username}}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                    {%for users_info in users_info%}
-                        <tr>
-                            <th scope="row">{{users_info.user_id}}</th>
-                            <td>{{users_info.surname}}</td>
-                            <td>{{users_info.name}}</td>
-                            <td>{{users_info.city}}</td>
-                            <td>{{users_info.district}}</td>
-                        </tr>
-                    {%endfor%}
-                    </tbody>
+                  {%endfor%}
+                  </tbody>
                   </table>
 
             </div>
