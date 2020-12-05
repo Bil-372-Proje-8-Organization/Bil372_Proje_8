@@ -2,7 +2,7 @@ import os
 import time
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
-from sqlalchemy import select
+from sqlalchemy import select,update, and_
 #from flask_socketio import SocketIO, join_room, leave_room, send
 
 from wtform_fields import *
@@ -63,7 +63,7 @@ def login():
     if login_form.validate_on_submit():
         user_object = User.query.filter_by(username=login_form.username.data).first()
         login_user(user_object)
-        return redirect(url_for('chat'))
+        return redirect(url_for('home'))
 
     return render_template("login.html", form=login_form)
 
@@ -78,7 +78,7 @@ def logout():
 
 
 @app.route("/home", methods=['GET', 'POST'])
-def chat():
+def home():
 
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
@@ -98,18 +98,31 @@ def profile():
 def your_adverts():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
-        return redirect(url_for('login'))
-    current_user.username
-    query = select([Advert]).where(Advert.c.users_id)
-    return render_template("your_adverts.html", username=current_user.username, rooms="" , adverts=db.session.query(Advert).join(Advertises,Advertises.c.ad_no == Advert.c.ad_no).all())
+        return redirect(url_for('login'))   
+    query = select([Advert]).where(Advert.c.users_id == current_user.id)
+    adverts= conn.execute(query)
+    return render_template("your_adverts.html", username=current_user.username, rooms="" , adverts=adverts)
 
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
-
-
+@app.route("/edit_advert/<int:id>", methods=['GET', 'POST'])
+def editAdvert(id):
+  if request.method =='POST':
+      values = {
+      'seller_price':request.form['seller_price'],
+      'dealer_price':request.form['dealer_price'],
+      'swop':request.form['swop'],
+      'pre_owned':request.form['pre_owned']
+      }
+      query = update(Advert).where(Advert.c.ad_no == id).values(values)
+      conn.execute(query)
+      return redirect(url_for('your_adverts'))  
+  query = select([Advert]).where(Advert.c.ad_no == id)
+  advert= conn.execute(query).fetchone()
+  return render_template('editAdvert.html', advert=advert)
 
 if __name__ == "__main__":
     app.run(debug=True)
