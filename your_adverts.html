@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block head %}
+    <title> Home </title>
+    <style>
+        .error {
+        font-size:18px;
+        color:#cc0000;
+        margin-top:30px
+    }
+    td {
+    text-align: center;
+    }
+    th {
+    text-align: center;
+    }
+
+    .table td th {
+    text-align: center;
+    }
+    </style>
+
+{% endblock %}
+{% block body %}
+    <!-- Flash error messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <p class="error text-center">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
+            <!-- Nav bar start -->
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
+                <div class="container-fluid">
+                    <div  class="cursor-pointer">
+                        <!-- Add a new ad -->
+                        <i class="fas fa-plus"></i>
+                        <a href="#" style="color: #335177"><span>New advert</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- User's own ads -->
+                        <i class="fas fa-car"></i>
+                        <a href="#" style="color: #335177"><span>Your adverts</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Go to the profile page -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
+                            </li>
+
+                             <li class="nav-item">
+                              <a  class="nav-link" href="{{ url_for('your_adverts') }}"><span style="color: #335177">your_adverts</span></a>
+                            </li>
+
+                            <!-- Logout -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Nav bar end -->
+
+            <!-- Main section start -->
+            <div >
+                <table class="table table-hover" style="margin-top:50px;">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Swap</th>
+                        <th scope="col">Pre-owned</th>
+                        <th scope="col">Seller Price</th>
+                        <th scope="col">Average Price</th>
+                          <th scope="col">Dealer Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for advert in adverts%}
+                        <tr>
+                            <th scope="row">{{advert.ad_no}}</th>
+                            <td>{{advert.swop}}</td>
+                            <td>{{advert.pre_owned}}</td>
+                            <td>{{advert.seller_price}}</td>
+                            <td>{{advert.average_price}}</td>
+                            <td>{{advert.dealer_price}}</td>
+                            <td class="align-middle">
+                                <a href="#" class="btn btn-outline-success" >Edit</a>
+                            </td>
+                            <td class="align-middle">
+                                <a href="#" class="btn btn-outline-success" >Delete</a>
+                            </td>
+                        </tr>
+                    {%endfor%}
+                    </tbody>
+                  </table>
+
+            </div>
+            <!-- Main section end -->
+
+        <!-- Get username
+        <span id="get-username">{{ username }}</span>
+        -->
+
+
+{% endblock %}
+
