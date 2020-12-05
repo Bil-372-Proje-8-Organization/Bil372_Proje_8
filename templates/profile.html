@@ -98,6 +98,9 @@
                           <td>{{Users_info.mail}}</td>
                           <td>{{Users_info.score}}</td>
                           <td>{{Users_info.username}}</td>
+                          <td class="text-right">
+                              <a href="{{url_for('editProfile', id=Users_info.users_id)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
+                          </td>
                       </tr>
                   {%endfor%}
                   </tbody>
