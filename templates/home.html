@@ -48,17 +48,13 @@
                     </div>
 
                     <div class="collapse navbar-collapse">
-                      <!-- User's profile -->
-                      <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
-                          </li>
-                      </ul>
-                    </div>
-
-                    <!-- Logout -->
-                    <div class="collapse navbar-collapse">
                         <ul class="navbar-nav ml-auto">
+                            <!-- Go to the profile page -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
+                            </li>
+
+                            <!-- Logout -->
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
                             </li>
