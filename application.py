@@ -124,5 +124,21 @@ def editAdvert(id):
   advert= conn.execute(query).fetchone()
   return render_template('editAdvert.html', advert=advert)
 
+@app.route("/edit_profile/<int:id>", methods=['GET', 'POST'])
+def editProfile(id):
+  if request.method =='POST':
+      values = {
+      'phone':request.form['name'],
+      'mail':request.form['surname'],
+      'city':request.form['city'],
+      'district':request.form['district']
+      }
+      query = update(Users_info).where(Users_info.c.users_id == id).values(values)
+      conn.execute(query)
+      return redirect(url_for('profile'))
+  query = select([Users_info]).where(Users_info.c.users_id == id)
+  users_info= conn.execute(query).fetchone()
+  return render_template('editProfile.html', users_info=users_info)
+
 if __name__ == "__main__":
     app.run(debug=True)
