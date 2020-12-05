@@ -94,6 +94,14 @@ def profile():
 
     return render_template("profile.html", username=current_user.username, rooms="" , Users_info=db.session.query(Users_info).filter_by(username=current_user.username).all())
 
+@app.route("/your_adverts", methods=['GET', 'POST'])
+def your_adverts():
+    if not current_user.is_authenticated:
+        flash('Please login', 'danger')
+        return redirect(url_for('login'))
+    current_user.username
+    query = select([Advert]).where(Advert.c.users_id)
+    return render_template("your_adverts.html", username=current_user.username, rooms="" , adverts=db.session.query(Advert).join(Advertises,Advertises.c.ad_no == Advert.c.ad_no).all())
 
 @app.errorhandler(404)
 def page_not_found(e):
