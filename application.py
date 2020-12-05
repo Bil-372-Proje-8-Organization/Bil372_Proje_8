@@ -24,6 +24,7 @@ login = LoginManager(app)
 login.init_app(app)
 
 Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
+Users_info = db.Table('users_info2', db.metadata, autoload=True, autoload_with=db.engine)
 
 @login.user_loader
 def load_user(id):
@@ -91,7 +92,7 @@ def profile():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("profile.html", username=current_user.username, rooms="" , adverts=db.session.query(Advert).all())
+    return render_template("profile.html", username=current_user.username, rooms="" , Users_info=db.session.query(Users_info).filter_by(username=current_user.username).all())
 
 
 @app.errorhandler(404)
