@@ -106,7 +106,7 @@ def your_adverts():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("your_adverts.html", id=current_user.id, rooms="" , adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all())
+    return render_template("your_adverts.html", id=current_user.id, rooms="" , adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 @app.errorhandler(404)
 def page_not_found(e):
