@@ -70,6 +70,8 @@
                   <thead>
                     <tr>
                       <th scope="col">Model</th>
+                      <th scope="col">Transmission</th>
+                      <th scope="col">Package</th>
                       <th scope="col">Color</th>
                       <th scope="col">Km</th>
                       <th scope="col">Pre-owned</th>
@@ -84,6 +86,18 @@
                           {%for vehicle in vehicles%}
                             {%if advert.brand_model_no == vehicle.vehicle_no%}
                               <td>{{vehicle.model_brand}}</td>
+                            {%endif%}
+                          {%endfor%}
+
+                          {%for vehicle in vehicles%}
+                            {%if advert.brand_model_no == vehicle.vehicle_no%}
+                              <td>{{vehicle.transmission}}</td>
+                            {%endif%}
+                          {%endfor%}
+
+                          {%for vehicle in vehicles%}
+                            {%if advert.brand_model_no == vehicle.vehicle_no%}
+                              <td>{{vehicle.package}}</td>
                             {%endif%}
                           {%endfor%}
 
