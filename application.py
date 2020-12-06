@@ -54,8 +54,8 @@ def index():
         db.session.add(user)
         db.session.commit()
 
-        flash('Registered successfully. Please login.', 'success')
-        return redirect(url_for('login'))
+        flash('User created successfully. Now, please add personal info', 'success')
+        return redirect(url_for('addProfile'))
 
     return render_template("index.html", form=reg_form)
 
@@ -91,6 +91,23 @@ def home():
     if current_user.username == 'akadir':
         return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
     return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+
+@app.route("/addProfile", methods=['GET', 'POST'])
+def addProfile():
+    if request.method =='POST':
+        values = {
+        'users_id':current_user.id,
+        'name':request.form['name'],
+        'surname': request.form['surname'],
+        'city':request.form['city'],
+        'district': request.form['district'],
+        'phone':request.form['phone'],
+        'mail': request.form['mail']
+        }
+        query = Users_info.insert().values(values)
+        conn.execute(query)
+        return redirect(url_for('login'))
+    return render_template("newProfile.html")
 
 @app.route("/addBrand", methods=['GET', 'POST'])
 def addBrand():
