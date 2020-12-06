@@ -30,8 +30,6 @@ Vehicle = db.Table('vehicle', db.metadata, autoload=True, autoload_with=db.engin
 Model = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
 
 
-#added by elif
-sayac=7
 
 
 @login.user_loader
@@ -163,9 +161,11 @@ def editAdvert(id):
   if request.method =='POST':
       values = {
       'seller_price':request.form['seller_price'],
-      'dealer_price':request.form['dealer_price'],
-      'swop':request.form['swop'],
-      'pre_owned':request.form['pre_owned']
+      'km':request.form['km'],
+      'color': request.form['color'],
+      'damage': request.form['damage'],
+      'second_hand':request.form['second_hand'],
+      'exchange':request.form['exchange']
       }
       query = update(Advert).where(Advert.c.ad_no == id).values(values)
       conn.execute(query)
@@ -173,6 +173,7 @@ def editAdvert(id):
   query = select([Advert]).where(Advert.c.ad_no == id)
   advert= conn.execute(query).fetchone()
   return render_template('editAdvert.html', advert=advert)
+
 
 #need some changes in database after that it is done
 '''
