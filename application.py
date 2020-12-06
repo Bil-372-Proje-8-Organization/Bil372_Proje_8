@@ -93,6 +93,7 @@ def home():
     if current_user.username == 'akadir':
         return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
     return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+
 @app.route("/addBrand", methods=['GET', 'POST'])
 def addBrand():
     if request.method =='POST':
@@ -106,7 +107,25 @@ def addBrand():
         return redirect(url_for('home'))  
     return render_template('newBrand.html')
 
-    
+@app.route("/addVehicle", methods=['GET', 'POST'])
+def addVehicle():
+    if request.method =='POST':
+        values = {
+        'model_brand':request.form['model_brand'],
+        'transmission':request.form['transmission'],
+        'engine_size': request.form['engine_size'], 
+        'package': request.form['package'], 
+        'drive_train': request.form['drive_train'], 
+        'num_cylinder': request.form['num_cylinder'], 
+        'power': request.form['power'], 
+        'dealer_price': request.form['dealer_price'],
+        'type': request.form['type'],
+        }
+        query = Vehicle.insert().values(values)
+        conn.execute(query)
+        return redirect(url_for('home'))  
+
+    return render_template('newVehicle.html', models=db.session.query(Model).all())    
 
 
 
