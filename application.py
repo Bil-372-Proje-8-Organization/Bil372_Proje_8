@@ -25,6 +25,8 @@ login.init_app(app)
 
 Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
 Users_info = db.Table('users_info', db.metadata, autoload=True, autoload_with=db.engine)
+Vehicle = db.Table('vehicle', db.metadata, autoload=True, autoload_with=db.engine)
+Model = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
 
 #added by elif
 sayac=7
@@ -88,7 +90,7 @@ def home():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
     
-    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all())
+    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
