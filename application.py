@@ -172,5 +172,15 @@ def editProfile(id):
   users_info= conn.execute(query).fetchone()
   return render_template('editProfile.html', users_info=users_info)
 
+
+@app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
+def detailsAdvert(id):
+    if not current_user.is_authenticated:
+        flash('Please login', 'danger')
+        return redirect(url_for('login'))
+
+    return render_template("detailsAdvert.html", id=current_user.id, rooms="",adverts=db.session.query(Advert).filter_by(ad_no=id).all())
+
+
 if __name__ == "__main__":
     app.run(debug=True)
