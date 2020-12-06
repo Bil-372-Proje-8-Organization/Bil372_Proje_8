@@ -47,13 +47,24 @@ $( function() {
         <h2 class="text-center">Update Advert</h2>       
         <div class="form-group">
             <label style="font-size:15px;"> Seller Price </label>
-            <input type="text" class="form-control" name="seller_price" placeholder="Seller Price " required="required" autofocus value="{{advert.seller_price}}" >
+            <input type="text" class="form-control" name="seller_price" placeholder="{{advert.seller_price}}" required="required" autofocus value="{{advert.seller_price}}" >
         </div>
 
         <div class="form-group">
-            <label style="font-size:15px;"> Dealer Price </label>
-            <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required"  value="{{advert.dealer_price}}">
+            <label style="font-size:15px;"> Kilometers </label>
+            <input type="number" class="form-control" name="km" placeholder="{{advert.km}}" required="required" autofocus value="{{advert.km}}" >
         </div>
+
+         <div class="form-group">
+            <label style="font-size:15px;"> Damage </label>
+            <input type="number" class="form-control" name="damage" placeholder="{{advert.damage}}" required="required" autofocus value="{{advert.damage}}" >
+        </div>
+
+        <div class="form-group">
+            <label style="font-size:15px;"> Color </label>
+            <input type="text" class="form-control" name="color" placeholder="color" required="required" autofocus value="{{advert.color}}" >
+        </div>
+
         <!--Explicity put here if we want we can remove it-->
         <div class="form-group">
             <label style="font-size:15px;"> Model </label>
@@ -75,62 +86,62 @@ $( function() {
         </div>
         
             
-        <label style="font-size:15px;"> Swap? </label>  
-        {%if advert.swop.lower() == 'yes'%} 
+        <label style="font-size:15px;"> Exchange? </label>
+        {%if advert.exchange.lower() == 'yes'%}
         
             <div class="form-check form-check-inline" style="margin-left:15px">  
-                    <input class="form-check-input" type="radio" name="swop"  value="Yes" checked>                
+                    <input class="form-check-input" type="radio" name="exchange"  value="Yes" checked>
                     <label class="form-check-label" for="inlineRadio1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="swop"  value="No">
+                <input class="form-check-input" type="radio" name="exchange"  value="No">
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
          
         {%else%}
         
             <div class="form-check form-check-inline" style="margin-left:15px">         
-                <input class="form-check-input" type="radio" name="swop"  value="Yes" >                
+                <input class="form-check-input" type="radio" name="exchange"  value="Yes" >
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="swop"  value="No" checked>
+                <input class="form-check-input" type="radio" name="exchange"  value="No" checked>
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
            
         {%endif%}   
    
-        <label style="font-size:15px; margin-left:70px;"> Pre-owned? </label>
-        {%if advert.pre_owned.lower() == 'yes'%}
+        <label style="font-size:15px; margin-left:50px;"> Is 2nd hand? </label>
+        {%if advert.second_hand.lower() == 'yes'%}
         
             <div class="form-check form-check-inline" style="margin-left:15px">
-                <input class="form-check-input" type="radio" name="pre_owned" value="Yes" checked>
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" checked>
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
             </div>  
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pre_owned"  value="No">
+                <input class="form-check-input" type="radio" name="second_hand"  value="No">
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
            
         {%else%}
         
             <div class="form-check form-check-inline" style="margin-left:15px">
-                <input class="form-check-input" type="radio" name="pre_owned" value="Yes" >
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" >
                 <label class="form-check-label" for="inlineRadio1">Yes</label>
             </div>  
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="pre_owned"  value="No" checked>
+                <input class="form-check-input" type="radio" name="second_hand"  value="No" checked>
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
             
            
-        {%endif%}    
+        {%endif%}
                 <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
             </div>
         
             
     </form>
-    
+
 </div>
 
 {%endblock%}
