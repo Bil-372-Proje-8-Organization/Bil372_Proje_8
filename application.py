@@ -26,6 +26,9 @@ login.init_app(app)
 Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
 Users_info = db.Table('users_info', db.metadata, autoload=True, autoload_with=db.engine)
 Brand = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
+Vehicle = db.Table('vehicle', db.metadata, autoload=True, autoload_with=db.engine)
+Model = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
+
 
 #added by elif
 sayac=7
@@ -88,6 +91,7 @@ def home():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
+
     if current_user.username == 'akadir':
         return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all())
 
@@ -123,7 +127,8 @@ def your_adverts():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("your_adverts.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all())
+
+    return render_template("your_adverts.html", id=current_user.id, adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 @app.errorhandler(404)
 def page_not_found(e):

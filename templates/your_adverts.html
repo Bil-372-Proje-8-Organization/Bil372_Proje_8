@@ -78,18 +78,30 @@
                         <th scope="col">Color</th>
                         <th scope="col">Damage</th>
                         <th scope="col">Second-hand</th>
-                        <th scope="col">KM</th>
-                          <th scope="col">Is second hand?</th>
+                        <th scope="col">Warranty</th>
+                        <th scope="col">Is second hand?</th>
                       </tr>
                     </thead>
                     <tbody>
                     {%for advert in adverts%}
                         <tr>
                             <th scope="row">{{advert.ad_no}}</th>
-                            <td>{{advert.seller_id}}</td>
+
+                            {%for Users_info in Users_info%}
+                              {%if Users_info.users_id == advert.seller_id%}
+                                <td>{{Users_info.name}}</td>
+                              {%endif%}
+                            {%endfor%}
+
                             <td>{{advert.date}}</td>
                             <td>{{advert.seller_price}}</td>
-                            <td>{{advert.brand_model_no}}</td>
+
+                            {%for vehicle in vehicles%}
+                              {%if advert.brand_model_no == vehicle.vehicle_no%}
+                                <td>{{vehicle.model_brand}}</td>
+                              {%endif%}
+                            {%endfor%}
+
                             <td>{{advert.km}}</td>
                             <td>{{advert.color}}</td>
                             <td>{{advert.damage}}</td>
