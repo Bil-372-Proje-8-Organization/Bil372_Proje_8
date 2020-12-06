@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block head %} 
+<style>
+.error {
+    font-size:18px;
+    color:#cc0000; 
+    margin-top:30px
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.advert-form {
+    width: 500px;
+    margin: 8px auto;
+    font-size: 15px;
+}
+.advert-form form {
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+.advert-form h2 {
+    margin: 0 0 5 5px;
+}
+
+body{
+    background: #f7f7f7;
+}
+</style>
+{%endblock%}
+
+{% block body %}
+
+<div class="advert text-center"> </div>
+<div class="advert-form">
+    <form action = "" method = "post" class="form-signin" style="margin-top:100px">
+        <h2 class="text-center">Add new Brand</h2>       
+        <div class="form-group">       
+            <select class="form-control" name="model_brand"  required="required" >
+                <option disabled selected>Select a brand and model</option>
+                {% for model in models %}
+                    <option >{{ model.brand_model }}</option> 
+                {% endfor %}        
+            </select>
+        </div>
+        <div class="form-group">       
+            <select class="form-control" name="transmission"  required="required" >
+                <option disabled selected>Transmission</option>
+                <option >Manual</option> 
+                <option >Automatic</option>                  
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" name="engine_size" placeholder="Engine Size" required="required" >
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="package" placeholder="Package" required="required" >
+        </div>
+        <div class="form-group">       
+            <select class="form-control" name="drive_train"  required="required" >
+                <option disabled selected>Drive Train</option>
+                <option >4x4</option> 
+                <option >front wheel</option>   
+                <option >rear wheel</option>                 
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" name="num_cylinder" placeholder="Cylinder" required="required" >
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="power" placeholder="Power" required="required" >
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required" >
+        </div>
+
+        <div class="form-group">       
+            <select class="form-control" name="type"  required="required" >
+                <option disabled selected>Type</option>
+                <option >automobile</option> 
+                <option >motorcycle</option>   
+                <option >truck</option>                 
+            </select>
+        </div>
+
+           
+                <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Add</button>
+            </div>
+        
+            
+    </form>
+    
+</div>
+
+{%endblock%}
+
