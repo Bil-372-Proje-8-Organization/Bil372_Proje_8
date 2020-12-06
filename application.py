@@ -87,15 +87,12 @@ def logout():
 
 @app.route("/home", methods=['GET', 'POST'])
 def home():
-
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
-
     if current_user.username == 'akadir':
-        return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all())
-
-    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all())
+        return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 @app.route("/addBrand", methods=['GET', 'POST'])
 def addBrand():
     if request.method =='POST':
