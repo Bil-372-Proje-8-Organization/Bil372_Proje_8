@@ -1,0 +1,109 @@
+<!--Update and delete buttons will be added-->
+{% extends "base.html" %}
+{% block head %}   
+    <title> Home </title>
+    <style>
+        .error {
+        font-size:18px;
+        color:#cc0000; 
+        margin-top:30px
+    }
+    td {
+    text-align: center;
+    }
+    th {
+    text-align: center;
+    }
+
+    .table td th {
+    text-align: center;
+    }
+    </style>
+    
+{% endblock %}
+{% block body %}
+    <!-- Flash error messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <p class="error text-center">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
+            <!-- Nav bar start -->
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
+                <div class="container-fluid">
+                    <div  class="cursor-pointer">
+                        
+                        <i class="fas fa-plus"></i>
+                        <a href="{{url_for('addBrand')}}" style="color: #335177"><span>New Brand</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <i class="fas fa-plus" style="margin-left:10px;"></i>
+                        <a href="{{url_for('addVehicle')}}" style="color: #335177"><span>New Vehicle</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <i class="fas fa-car" style="margin-left:10px;"></i>
+                        <a href="{{url_for('vehicles')}}" style="color: #335177"><span>All Vehicles</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <i class="fas fa-home" style="margin-left:10px;"></i>
+                        <a href="{{url_for('home')}}" style="color: #335177"><span>Main Page</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        
+                        
+
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Go to the profile page -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
+                            </li>
+                            
+                            <!-- Logout -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Nav bar end -->
+
+            <!-- Main section start -->
+            <div >
+                <table class="table table-hover" style="margin-top:50px;">
+                    <thead>
+                      <tr>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>                      
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for brand in brands%}    
+                        <tr>
+                            <td>{{brand.brand_name}}</td>
+                            <td>{{brand.model_name}}</td>
+                            <td class="align-middle">
+                              <a href="#" class="btn btn-outline-success" >Update</a>
+                              <a href="#" class="btn btn-outline-danger" >Delete</a>
+                            </td>
+                        </tr>
+                    {%endfor%}   
+                    </tbody>
+                  </table>
+
+            </div>
+            <!-- Main section end -->
+
+
+        
+{% endblock %}    
+
