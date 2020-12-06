@@ -67,32 +67,44 @@
             <!-- Main section start -->
             <div >
                 <table class="table table-hover" style="margin-top:50px;">
-                    <thead>
+                  <thead>
+                    <tr>
+                      <th scope="col">Model</th>
+                      <th scope="col">Color</th>
+                      <th scope="col">Km</th>
+                      <th scope="col">Pre-owned</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Seller</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {%for advert in adverts%}
                       <tr>
-                        <th scope="col">Model</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Km</th>
-                        <th scope="col">Pre-owned</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Seller</th>
+
+                          {%for vehicle in vehicles%}
+                            {%if advert.brand_model_no == vehicle.vehicle_no%}
+                              <td>{{vehicle.model_brand}}</td>
+                            {%endif%}
+                          {%endfor%}
+
+                          <td>{{advert.color}}</td>
+                          <td>{{advert.km}}</td>
+                          <td>{{advert.second_hand}}</td>
+                          <td>{{advert.seller_price}}</td>
+
+                          {%for Users_info in Users_info%}
+                            {%if Users_info.users_id == advert.seller_id%}
+                              <td>{{Users_info.name}}</td>
+                            {%endif%}
+                          {%endfor%}
+
+                          <td class="align-middle">
+                            <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
+                          </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                    {%for advert in adverts%}    
-                        <tr>
-                            <td>{{advert.brand_model_no}}</td>
-                            <td>{{advert.color}}</td>
-                            <td>{{advert.km}}</td>
-                            <td>{{advert.second_hand}}</td>
-                            <td>{{advert.seller_price}}</td>
-                            <td>{{advert.seller_id}}</td>
-                            <td class="align-middle">
-                              <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
-                            </td>
-                        </tr>
-                    {%endfor%}   
-                    </tbody>
-                  </table>
+                  {%endfor%}
+                  </tbody>
+                </table>
 
             </div>
             <!-- Main section end -->
