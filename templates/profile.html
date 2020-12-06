@@ -57,7 +57,7 @@
                         <ul class="navbar-nav ml-auto">
                             <!-- Go to the home screen -->
                             <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('chat') }}"><span style="color: #335177">Home</span></a>
+                                <a  class="nav-link" href="{{ url_for('home') }}"><span style="color: #335177">Home</span></a>
                             </li>
 
                             <!-- Logout -->
@@ -98,6 +98,9 @@
                           <td>{{Users_info.mail}}</td>
                           <td>{{Users_info.score}}</td>
                           <td>{{Users_info.username}}</td>
+                          <td class="text-right">
+                              <a href="{{url_for('editProfile', id=Users_info.users_id)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
+                          </td>
                       </tr>
                   {%endfor%}
                   </tbody>

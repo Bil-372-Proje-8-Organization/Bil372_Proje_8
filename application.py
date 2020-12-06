@@ -129,6 +129,7 @@ def editAdvert(id):
   return render_template('editAdvert.html', advert=advert)
 
 
+
 @app.route("/addAdvert", methods=['GET', 'POST'])
 def addAdvert():
   if request.method =='POST':
@@ -158,6 +159,7 @@ def addAdvert():
 #  query = select([Advert]).where(Advert.c.ad_no == id)
 #  advert= conn.execute(query).fetchone()
 #  return render_template("your_adverts.html", username=current_user.username, rooms="", adverts=advert)
+
 
 
 @app.route("/edit_profile/<int:id>", methods=['GET', 'POST'])

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block head %} 
+<style>
+.error {
+    font-size:18px;
+    color:#cc0000; 
+    margin-top:30px
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.conference-form {
+    width: 500px;
+    margin: 8px auto;
+    font-size: 15px;
+}
+.conference-form form {
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+.conference-form h2 {
+    margin: 0 0 5 5px;
+}
+
+body{
+    background: #f7f7f7;
+}
+</style>
+{%endblock%}
+
+{% block body %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() {
+    $( "#datepicker" ).datepicker();
+} );
+</script>
+<div class="conference text-center"> </div>
+<div class="conference-form">
+    <form action = "" method = "post" class="form-signin">
+        <h2 class="text-center">Update Advert</h2>       
+        <div class="form-group">
+            <label style="font-size:15px;"> Seller Price </label>
+            <input type="text" class="form-control" name="seller_price" placeholder="Seller Price " required="required" autofocus value="{{advert.seller_price}}" >
+        </div>
+
+        <div class="form-group">
+            <label style="font-size:15px;"> Dealer Price </label>
+            <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required"  value="{{advert.dealer_price}}">
+        </div>
+        <!--Explicity put here if we want we can remove it-->
+        <div class="form-group">
+            <label style="font-size:15px;"> Model </label>
+            <div>
+                <select name="yearpicker" id="yearpicker"></select>
+                <script type="text/javascript"
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+                </script>
+                <script type="text/javascript">
+                let startYear = 1800;
+                let endYear = new Date().getFullYear();
+                for (i = endYear; i > startYear; i--)
+                {
+                $('#yearpicker').append($('<option />').val(i).html(i));
+                }
+                </script>
+                <!-- <input id="datepicker" type="date" data-date="" data-date-format="YYYY" class="form-control" name="start_date" placeholder="Start Date" required="required" > -->
+            </div>
+        </div>
+        
+            
+        <label style="font-size:15px;"> Swap? </label>  
+        {%if advert.swop.lower() == 'yes'%} 
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">  
+                    <input class="form-check-input" type="radio" name="swop"  value="Yes" checked>                
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="swop"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+         
+        {%else%}
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">         
+                <input class="form-check-input" type="radio" name="swop"  value="Yes" >                
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="swop"  value="No" checked>
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+           
+        {%endif%}   
+   
+        <label style="font-size:15px; margin-left:70px;"> Pre-owned? </label>
+        {%if advert.pre_owned.lower() == 'yes'%}
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="pre_owned" value="Yes" checked>
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>  
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pre_owned"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+           
+        {%else%}
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="pre_owned" value="Yes" >
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>  
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="pre_owned"  value="No" checked>
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+            
+           
+        {%endif%}    
+                <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
+            </div>
+        
+            
+    </form>
+    
+</div>
+
+{%endblock%}
+
