@@ -24,7 +24,7 @@ login = LoginManager(app)
 login.init_app(app)
 
 Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
-Users_info = db.Table('users_info2', db.metadata, autoload=True, autoload_with=db.engine)
+Users_info = db.Table('users_info', db.metadata, autoload=True, autoload_with=db.engine)
 
 #added by elif
 sayac=7
