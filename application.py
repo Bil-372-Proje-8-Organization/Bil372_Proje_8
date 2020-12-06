@@ -25,6 +25,7 @@ login.init_app(app)
 
 Advert = db.Table('advertisement', db.metadata, autoload=True, autoload_with=db.engine)
 Users_info = db.Table('users_info', db.metadata, autoload=True, autoload_with=db.engine)
+Brand = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
 
 #added by elif
 sayac=7
@@ -87,8 +88,26 @@ def home():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
-    
+    if current_user.username == 'akadir':
+        return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all())
+
     return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all())
+@app.route("/addBrand", methods=['GET', 'POST'])
+def addBrand():
+    if request.method =='POST':
+        values = {
+        'brand_name':request.form['brand_name'],
+        'model_name':request.form['model_name'],
+        'brand_model': request.form['brand_name'] + '-' + request.form['model_name']
+        }
+        query = Brand.insert().values(values)
+        conn.execute(query)
+        return redirect(url_for('home'))  
+    return render_template('newBrand.html')
+
+    
+
+
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -96,7 +115,7 @@ def profile():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("profile.html", id=current_user.id, rooms="" , Users_info=db.session.query(Users_info).filter_by(users_id=current_user.id).all())
+    return render_template("profile.html", id=current_user.id,  Users_info=db.session.query(Users_info).filter_by(users_id=current_user.id).all())
 
 @app.route("/your_adverts", methods=['GET', 'POST'])
 def your_adverts():
@@ -104,7 +123,7 @@ def your_adverts():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("your_adverts.html", id=current_user.id, rooms="" , adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all())
+    return render_template("your_adverts.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all())
 
 @app.errorhandler(404)
 def page_not_found(e):
