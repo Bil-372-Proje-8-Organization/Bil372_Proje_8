@@ -127,6 +127,13 @@ def addVehicle():
 
     return render_template('newVehicle.html', models=db.session.query(Model).all())    
 
+@app.route("/allBrands", methods=['GET', 'POST'])
+def brands():
+    return render_template('allBrands.html', brands=db.session.query(Model).all())
+
+@app.route("/allVehicles", methods=['GET', 'POST'])
+def vehicles():
+    return render_template('allVehicles.html', vehicles=db.session.query(Vehicle).all())    
 
 
 @app.route("/profile", methods=['GET', 'POST'])
