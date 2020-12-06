@@ -96,8 +96,7 @@ def profile():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("profile.html", username=current_user.username,  Users_info=db.session.query(Users_info).filter_by(username=current_user.username).all())
-
+    return render_template("profile.html", id=current_user.id, rooms="" , Users_info=db.session.query(Users_info).filter_by(users_id=current_user.id).all())
 @app.route("/your_adverts", methods=['GET', 'POST'])
 def your_adverts():
     if not current_user.is_authenticated:
