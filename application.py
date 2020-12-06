@@ -88,7 +88,7 @@ def home():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
     
-    return render_template("home.html", username=current_user.username, rooms="" , adverts=db.session.query(Advert).all())
+    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all())
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -96,16 +96,16 @@ def profile():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("profile.html", username=current_user.username, rooms="" , Users_info=db.session.query(Users_info).filter_by(username=current_user.username).all())
+    return render_template("profile.html", username=current_user.username,  Users_info=db.session.query(Users_info).filter_by(username=current_user.username).all())
 
 @app.route("/your_adverts", methods=['GET', 'POST'])
 def your_adverts():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))   
-    query = select([Advert]).where(Advert.c.users_id == current_user.id)
+    query = select([Advert]).where(Advert.c.seller_id == current_user.id)
     adverts= conn.execute(query)
-    return render_template("your_adverts.html", username=current_user.username, rooms="" , adverts=adverts)
+    return render_template("your_adverts.html", username=current_user.username,  adverts=adverts)
 
 @app.errorhandler(404)
 def page_not_found(e):
