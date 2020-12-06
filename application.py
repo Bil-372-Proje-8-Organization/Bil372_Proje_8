@@ -159,10 +159,12 @@ def deleteAdvert(id):
 def editProfile(id):
   if request.method =='POST':
       values = {
-      'phone':request.form['name'],
-      'mail':request.form['surname'],
+      'name':request.form['name'],
+      'surname':request.form['surname'],
       'city':request.form['city'],
-      'district':request.form['district']
+      'district':request.form['district'],
+      'phone':request.form['phone'],
+      'mail':request.form['mail']
       }
       query = update(Users_info).where(Users_info.c.users_id == id).values(values)
       conn.execute(query)
