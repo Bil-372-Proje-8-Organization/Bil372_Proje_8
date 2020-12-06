@@ -128,38 +128,31 @@ def editAdvert(id):
   advert= conn.execute(query).fetchone()
   return render_template('editAdvert.html', advert=advert)
 
-
-
+#need some changes in database after that it is done
+'''
 @app.route("/addAdvert", methods=['GET', 'POST'])
 def addAdvert():
   if request.method =='POST':
-      valuess = {
+      values = {
       'seller_price':request.form['seller_price'],
       'dealer_price':request.form['dealer_price'],
       'swop':request.form['swop'],
       'pre_owned':request.form['pre_owned']
       }
-      ins = [Advert].insert().values(7, valuess, current_user.id)
+      ##counter must need to be increment in database
+      #ins = Advert.insert().values(7, values, current_user.id) 
       flash('Inserted successfully!', 'success')
       return redirect(url_for('addAdvert'))
   query = select([Advert]).where(Advert.c.users_id == current_user.id)
   adverts = conn.execute(query)
-  return render_template("your_adverts.html", username=current_user.username, rooms="", adverts=adverts)
-
-  #username=current_user.username, rooms="", adverts=db.session.query(Advert).all())
+  return redirect(url_for('your_adverts')) '''
 
 
-#@app.route("/delete_advert/<int:id>", methods=['GET', 'POST'])
-#def deleteAdvert(id):
-  #if request.method =='POST':
-#      db.session.query(Advert).filter(Advert.ad_no == id).delete()
-#      db.session.commit()
-#      flash('Deleted successfully!', 'success')
-#      return redirect(url_for('your_adverts'))
-#  query = select([Advert]).where(Advert.c.ad_no == id)
-#  advert= conn.execute(query).fetchone()
-#  return render_template("your_adverts.html", username=current_user.username, rooms="", adverts=advert)
-
+@app.route("/delete_advert/<int:id>")
+def deleteAdvert(id):
+  query = Advert.delete().where(Advert.c.ad_no == id)
+  conn.execute(query)
+  return redirect(url_for('your_adverts'))
 
 
 @app.route("/edit_profile/<int:id>", methods=['GET', 'POST'])

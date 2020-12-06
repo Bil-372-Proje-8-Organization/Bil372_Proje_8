@@ -90,7 +90,7 @@
                                 <a href="{{url_for('editAdvert', id=advert.ad_no)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
                             </td>
                             <td class="text-left">
-                                <a href="#" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
+                                <a href="{{url_for('deleteAdvert', id=advert.ad_no)}}" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
                             </td>
                         </tr>
                     {%endfor%}
