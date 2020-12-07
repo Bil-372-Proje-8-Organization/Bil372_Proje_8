@@ -119,7 +119,7 @@ def addBrand():
         }
         query = Brand.insert().values(values)
         conn.execute(query)
-        return redirect(url_for('home'))  
+        return redirect(url_for('brands'))  
     return render_template('newBrand.html')
 
 @app.route("/addVehicle", methods=['GET', 'POST'])
@@ -138,13 +138,17 @@ def addVehicle():
         }
         query = Vehicle.insert().values(values)
         conn.execute(query)
-        return redirect(url_for('home'))  
+        return redirect(url_for('vehicles'))  
 
     return render_template('newVehicle.html', models=db.session.query(Model).all())    
 
 @app.route("/allBrands", methods=['GET', 'POST'])
 def brands():
     return render_template('allBrands.html', brands=db.session.query(Model).all())
+
+@app.route("/allVehicles", methods=['GET', 'POST'])
+def vehicles():
+    return render_template('allVehicles.html', vehicles=db.session.query(Vehicle).all())
 
 @app.route("/deleteBrand/<brand_model>")
 def deleteBrand(brand_model):
@@ -158,10 +162,11 @@ def deleteVehicle(vehicle_no):
   conn.execute(query)
   return redirect(url_for('vehicles'))  
 
-@app.route("/allVehicles", methods=['GET', 'POST'])
-def vehicles():
-    return render_template('allVehicles.html', vehicles=db.session.query(Vehicle).all())    
-
+@app.route("/delete_advert/<int:id>")
+def deleteAdvert(id):
+  query = Advert.delete().where(Advert.c.ad_no == id)
+  conn.execute(query)
+  return redirect(url_for('your_adverts'))
 
 @app.route("/profile", methods=['GET', 'POST'])
 def profile():
@@ -204,33 +209,6 @@ def editAdvert(id):
   return render_template('editAdvert.html', advert=advert)
 
 
-#need some changes in database after that it is done
-'''
-@app.route("/addAdvert", methods=['GET', 'POST'])
-def addAdvert():
-  if request.method =='POST':
-      values = {
-      'seller_price':request.form['seller_price'],
-      'dealer_price':request.form['dealer_price'],
-      'swop':request.form['swop'],
-      'pre_owned':request.form['pre_owned']
-      }
-      ##counter must need to be increment in database
-      #ins = Advert.insert().values(7, values, current_user.id) 
-      flash('Inserted successfully!', 'success')
-      return redirect(url_for('addAdvert'))
-  query = select([Advert]).where(Advert.c.users_id == current_user.id)
-  adverts = conn.execute(query)
-  return redirect(url_for('your_adverts')) '''
-
-
-@app.route("/delete_advert/<int:id>")
-def deleteAdvert(id):
-  query = Advert.delete().where(Advert.c.ad_no == id)
-  conn.execute(query)
-  return redirect(url_for('your_adverts'))
-
-
 @app.route("/edit_profile/<int:id>", methods=['GET', 'POST'])
 def editProfile(id):
   if request.method =='POST':
@@ -270,6 +248,24 @@ def editVehicle(no):
   vehicle = conn.execute(query).fetchone()
   return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all())
 
+#need some changes in database after that it is done
+'''
+@app.route("/addAdvert", methods=['GET', 'POST'])
+def addAdvert():
+  if request.method =='POST':
+      values = {
+      'seller_price':request.form['seller_price'],
+      'dealer_price':request.form['dealer_price'],
+      'swop':request.form['swop'],
+      'pre_owned':request.form['pre_owned']
+      }
+      ##counter must need to be increment in database
+      #ins = Advert.insert().values(7, values, current_user.id) 
+      flash('Inserted successfully!', 'success')
+      return redirect(url_for('addAdvert'))
+  query = select([Advert]).where(Advert.c.users_id == current_user.id)
+  adverts = conn.execute(query)
+  return redirect(url_for('your_adverts')) '''
 
 @app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
 def detailsAdvert(id):
