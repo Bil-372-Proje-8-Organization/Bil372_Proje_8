@@ -315,6 +315,8 @@ def filter():
         max_price= request.form['max_price']
         min_year= request.form['min_year']
         max_year= request.form['max_year']
+        min_km= request.form['min_km']
+        max_km=request.form['max_km']
         if request.form['min_price'] == '':
            min_price=0
         if request.form['max_price'] == '':
@@ -322,8 +324,12 @@ def filter():
         if request.form['min_year'] == '':
            min_year=1900
         if request.form['max_year'] == '':
-           max_year=2022  
-        query = select([Advert]).where(and_(Advert.c.seller_price <= max_price, Advert.c.seller_price >= min_price))
+           max_year=2022
+        if request.form['min_km'] == '':
+           min_km=0
+        if request.form['max_km'] == '':
+           max_km=1000000
+        query = select([Advert]).where(and_(Advert.c.seller_price <= max_price, Advert.c.seller_price >= min_price, Advert.c.km <= max_km, Advert.c.km>= min_km))
         adverts = conn.execute(query).fetchall()
         query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['brand_model']))
         vehicles = conn.execute(query).fetchall()
