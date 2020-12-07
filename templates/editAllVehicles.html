@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block head %}
+<style>
+  .error {
+    font-size:18px;
+    color:#cc0000;
+    margin-top:30px
+  }
+  .form-group {
+    margin-bottom: 10px;
+  }
+  .advert-form {
+    width: 500px;
+    margin: 8px auto;
+    font-size: 15px;
+  }
+  .advert-form form {
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+  }
+  .advert-form h2 {
+    margin: 0 0 5 5px;
+  }
+
+  body{
+    background: #f7f7f7;
+  }
+</style>
+{%endblock%}
+
+{% block body %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+</script>
+<div class="advert text-center"> </div>
+<div class="advert-form">
+  <form action = "" method = "post" class="form-signin">
+    <h2 class="text-center">Update Vehicle</h2>
+    <div class="form-group">
+      <label style="font-size:15px;"> Brand and Model </label>
+      <input type="text" class="form-control" name="model_brand" placeholder="Brand and model" required="required" autofocus value="{{vehicle.model_brand}}" >
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Transmission </label>
+      <input type="text" class="form-control" name="transmission" placeholder="Transmission" required="required"  value="{{vehicle.transmission}}">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Engine Size </label>
+      <input type="text" class="form-control" name="engine_size" placeholder="Engine Size" required="required" autofocus value="{{vehicle.engine_size}}" >
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Package </label>
+      <input type="text" class="form-control" name="package" placeholder="Package" required="required"  value="{{vehicle.package}}">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Drive-Train </label>
+      <input type="number" class="form-control" name="drive_train" placeholder="Drive-Train" required="required" autofocus value="{{vehicle.drive_train}}" >
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Number of Cylinders </label>
+      <input type="text" class="form-control" name="num_cylinder" placeholder="Number of Cylinders" required="required"  value="{{vehicle.num_cylinder}}">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Power </label>
+      <input type="text" class="form-control" name="power" placeholder="Power" required="required"  value="{{vehicle.power}}">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Dealer Price </label>
+      <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required"  value="{{vehicle.dealer_price}}">
+    </div>
+
+    <div class="form-group">
+      <label style="font-size:15px;"> Type </label>
+      <input type="text" class="form-control" name="type" placeholder="Type" required="required"  value="{{vehicle.type}}">
+    </div>
+
+
+
+    <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
+</div>
+
+
+</form>
+
+</div>
+
+{%endblock%}

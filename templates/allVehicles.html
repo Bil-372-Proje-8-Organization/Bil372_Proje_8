@@ -106,8 +106,8 @@
                             <td>{{vehicle.dealer_price}}</td>
                             <td>{{vehicle.type}}</td>
                             <td class="align-middle">
-                              <a href="#" class="btn btn-outline-success" >Update</a>
-                              <a href="#" class="btn btn-outline-danger" >Delete</a>
+                                <a href="{{url_for('editAllVehicles', id=Vehicle.vehicle_no)}}" class="btn btn-outline-success" >Update</a>
+                                <a href="#" class="btn btn-outline-danger" >Delete</a>
                             </td>
                         </tr>
                     {%endfor%}   
