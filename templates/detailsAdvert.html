@@ -1,148 +1,206 @@
 {% extends "base.html" %}
 {% block head %}
-    <title> Home </title>
+    <title> detailsAdvert </title>
     <style>
-        .error {
+    .error {
         font-size:18px;
         color:#cc0000;
         margin-top:30px
     }
+
+    .bg-c-lite-green {
+        background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
+         background: linear-gradient(to right, #8beabe, #040fd7)
+    }
+    nav{
+         background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
+         background: linear-gradient(to right, #8beabe, #040fd7)
+    }
+    table {
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+    }
     td {
     text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
     }
     th {
-    text-align: center;
+        text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+    }
+
+    div {
+        padding: 25px 50px 75px 100px;
     }
 
     .table td th {
-    text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+        text-align: center;
     }
+
     </style>
 
 {% endblock %}
 {% block body %}
-<!-- Flash error messages -->
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<p class="error text-center">{{ messages[0] }}</p>
-{% endif %}
-{% endwith %}
-<!-- Nav bar start -->
-<nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-  <div class="container-fluid">
-    <div  class="cursor-pointer">
-      <!-- Add a new ad -->
-      <i class="fas fa-plus"></i>
-      <a href="#" style="color: #335177"><span>New advert</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-      <!-- User's own ads -->
-      <i class="fas fa-car" style="margin-left:10px;"></i>
-      <a href="{{url_for('home')}}" style="color: #335177"><span>All adverts</span></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-    </div>
-    
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-        <!-- Go to the profile page -->
-        <li class="nav-item">
-          <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
-        </li>
-        
-        <!-- Logout -->
-        <li class="nav-item">
-          <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- Nav bar end -->
+    <!-- Flash error messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <p class="error text-center">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
 
-<!-- Main section start -->
-<div >
-  <table class="table table-hover" style="margin-top:50px;">
-    <thead>
-      <tr>
-        <th scope="col">Model</th>
-        <th scope="col">Package</th>
-        <th scope="col">Transmission</th>
-        <th scope="col">Drive-train</th>
-        <th scope="col">Engine Size</th>
-        <th scope="col">Cyclinder Num</th>
-        <th scope="col">Power</th>
 
-        <th scope="col">Color</th>
-        <th scope="col">Km</th>
-        <th scope="col">Year</th>
+            <!-- Nav bar start -->
+            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
+                <div class="container-fluid">
+                    <div  class="cursor-pointer">
+                        <!-- Add a new ad -->
+                        <i class="fas fa-plus"></i>
+                        <a href="{{ url_for('newAdvert') }}" style="color: #335177"><span>New advert</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-        <th scope="col">Damage</th>
-        <th scope="col">Warranty</th>
-        <th scope="col">Exchange</th>
+                        <!-- User's own ads -->
+                        <i class="fas fa-car" style="margin-left:10px;"></i>
+                        <a href="{{ url_for('your_adverts') }}" style="color: #335177"><span>Your adverts</span></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
 
-        <th scope="col">Seller Price</th>
-        <th scope="col">Dealer Price</th>
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Go to the home screen -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('home') }}"><span style="color: #335177">Home</span></a>
+                            </li>
 
-        <th scope="col">Seller name</th>
-        <th scope="col">Seller phone</th>
+                            <!-- Logout -->
+                            <li class="nav-item">
+                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Nav bar end -->
 
-        <th scope="col">Date of advert</th>
-      </tr>
-    </thead>
-    <tbody>
-      {%for advert in adverts%}
+
+          <tbody>
+
+
+            <!-- Main section start -->
+            <div style=" background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7));
+        background: linear-gradient(to right, #8beabe, #040fd7)">
+                <table class="table table-hover" style="margin-top:60px; margin-bottom:0px; background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)" >
+
+                  {%for advert in adverts%}
           <tr>
             {%for vehicle in vehicles%}
               {%if advert.vehicle_no == vehicle.vehicle_no%}
-                <td>{{vehicle.brand_model}}</td>
-                <td>{{vehicle.package}}</td>
-                <td>{{vehicle.transmission}}</td>
-                <td>{{vehicle.drive_train}}</td>
-                <td>{{vehicle.engine_size}}</td>
-                <td>{{vehicle.num_cylinder}}</td>
-                <td>{{vehicle.power}}</td>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <td>{{vehicle.brand_model}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Package</th>
+                    <td>{{vehicle.package}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Transmission</th>
+                    <td>{{vehicle.transmission}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Drive-train</th>
+                      <td>{{vehicle.drive_train}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Engine Size</th>
+                      <td>{{vehicle.engine_size}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Cyclinder Num</th>
+                      <td>{{vehicle.num_cylinder}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Power</th>
+                      <td>{{vehicle.power}}</td>
+                  </tr>
 
-                <td>{{advert.color}}</td>
-                <td>{{advert.km}}</td>
-                <td>{{vehicle.year}}</td>
 
-                <td>{{advert.damage}}</td>
-                <td>{{advert.warranty}}</td>
-                <td>{{advert.exchange}}</td>
+                  <tr>
+                      <th scope="col">Color</th>
+                      <td>{{advert.color}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Km</th>
+                      <td>{{advert.km}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Year</th>
+                      <td>{{vehicle.year}}</td>
+                  </tr>
 
-                <td>{{advert.seller_price}}</td>
-                <td>{{vehicle.dealer_price}}</td>
+
+                  <tr>
+                      <th scope="col">Damage</th>
+                      <td>{{advert.damage}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Warranty</th>
+                      <td>{{advert.warranty}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Exchange</th>
+                      <td>{{advert.exchange}}</td>
+                  </tr>
+
+                  <tr>
+                       <th scope="col">Seller Price</th>
+                      <td>{{advert.seller_price}}</td>
+                  </tr>
+                  <tr>
+                      <th scope="col">Dealer Price</th>
+                      <td>{{vehicle.dealer_price}}</td>
+                  </tr>
 
                 {%for Users_info in Users_info%}
                     {%if Users_info.users_id == advert.seller_id%}
-                        <td>{{Users_info.name}}</td>
-                        <td>{{Users_info.phone}}</td>
+                        <tr>
+                           <th scope="col">Seller name</th>
+                          <td>{{Users_info.name}}-{{Users_info.surname}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="col">Phone</th>
+                          <td>{{Users_info.phone}}</td>
+                        </tr>
                     {%endif%}
                 {%endfor%}
-
-                <td>{{advert.ad_date}}</td>
-
-                <td class="align-middle">
+                <tr>
+                  <th scope="col">Date of advert</th>
+                  <td>{{advert.ad_date}}</td>
+                </tr>
+                <td class="align-left">
                    <a href="{{ url_for('sellers_adverts',id=advert.seller_id) }}" class="btn btn-info" >Seller's other adverts</a>
                 </td>
               {%endif%}
             {%endfor%}
           </tr>
       {%endfor%}
-    </tbody>
-  </table>
-  
-</div>
-<!-- Main section end -->
+                </table>
+            </div>
+            <!-- Main section end -->
 
-<!-- Get username
-<span id="get-username">{{ username }}</span>
--->
+        <!-- Get username
+        <span id="get-username">{{ username }}</span>
+        -->
+
 
 {% endblock %}
+
 
