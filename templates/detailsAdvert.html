@@ -112,6 +112,10 @@
         <td>{{advert.exchange}}</td>
         {%endif%}
         {%endfor%}
+          
+        <td class="align-middle">
+           <a href="{{ url_for('sellers_adverts',id=advert.seller_id) }}" class="btn btn-info" >Seller's other adverts</a>
+        </td>
       </tr>
       {%endfor%}
     </tbody>
