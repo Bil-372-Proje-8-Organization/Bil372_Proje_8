@@ -48,7 +48,7 @@
   <form action = "" method = "post" class="form-signin" style="margin-top:50px">
     <h2 class="text-center">Update Vehicle</h2>
 <div class="form-group">
-            <select class="form-control" id ="model_brand" name="model_brand"  required="required" >
+            <select class="form-control" id ="model_brand" name="brand_model"  required="required" >
                 <option disabled selected value="" >Select a brand and model</option>
                 {% for model in models %}
                     <option >{{ model.brand_model }}</option>
@@ -102,6 +102,23 @@
             </select>
         </div>
 
+        <div class="form-group">
+          <label style="font-size:15px;"> Year </label>
+          <div>
+              <select name="year" id="yearpicker"></select>
+              <script type="text/javascript"
+                      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"> 
+              </script>
+              <script type="text/javascript">
+              let startYear = 1900;
+              let endYear = new Date().getFullYear();
+              for (i = endYear; i > startYear; i--)
+              {
+              $('#yearpicker').append($('<option />').val(i).html(i));
+              }
+              </script>
+          </div>
+      </div>
 
     <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
 </div>

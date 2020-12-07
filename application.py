@@ -88,7 +88,7 @@ def home():
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
-    if current_user.username == 'akadir':
+    if current_user.username == 'admin':
         return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
     return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
@@ -126,7 +126,7 @@ def addBrand():
 def addVehicle():
     if request.method =='POST':
         values = {
-        'model_brand':request.form['model_brand'],
+        'brand_model':request.form['brand_model'],
         'transmission':request.form['transmission'],
         'engine_size': request.form['engine_size'], 
         'package': request.form['package'], 
@@ -135,6 +135,7 @@ def addVehicle():
         'power': request.form['power'], 
         'dealer_price': request.form['dealer_price'],
         'type': request.form['type'],
+        'year': request.form['year'],
         }
         query = Vehicle.insert().values(values)
         conn.execute(query)
@@ -231,7 +232,7 @@ def editProfile(id):
 def editVehicle(no):
   if request.method =='POST':
       values = {
-      'model_brand':request.form['model_brand'],
+      'brand_model':request.form['brand_model'],
       'transmission':request.form['transmission'],
       'engine_size':request.form['engine_size'],
       'package':request.form['package'],
@@ -240,6 +241,7 @@ def editVehicle(no):
       'power':request.form['power'],
       'dealer_price':request.form['dealer_price'],
       'type':request.form['type'],
+      'year':request.form['year'],
       }
       query = update(Vehicle).where(Vehicle.c.vehicle_no == no).values(values)
       conn.execute(query)

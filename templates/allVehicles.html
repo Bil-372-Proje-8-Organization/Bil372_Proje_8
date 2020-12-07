@@ -90,13 +90,14 @@
                         <th scope="col">Cylinder</th>  
                         <th scope="col">Power</th> 
                         <th scope="col">Dealer Price</th>                    
-                        <th scope="col">Type</th> 
+                        <th scope="col">Type</th>
+                        <th scope="col">Year</th>
                       </tr>
                     </thead>
                     <tbody>
                     {%for vehicle in vehicles%}    
                         <tr>
-                            <td>{{vehicle.model_brand}}</td>
+                            <td>{{vehicle.brand_model}}</td>
                             <td>{{vehicle.transmission}}</td>
                             <td>{{vehicle.engine_size}}</td>
                             <td>{{vehicle.package}}</td>
@@ -105,6 +106,7 @@
                             <td>{{vehicle.power}}</td>
                             <td>{{vehicle.dealer_price}}</td>
                             <td>{{vehicle.type}}</td>
+                            <td>{{vehicle.year}}</td>
                             <td class="align-middle">
                                 <a href="{{url_for('editVehicle', no=vehicle.vehicle_no)}}" class="btn btn-outline-success" >Update</a>
                                 <a href="{{url_for('deleteVehicle', vehicle_no= vehicle.vehicle_no)}}" class="btn btn-outline-danger" >Delete</a>
