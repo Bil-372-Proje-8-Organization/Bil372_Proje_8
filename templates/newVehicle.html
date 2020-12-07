@@ -38,7 +38,7 @@ body{
         <h2 class="text-center">Add new Brand</h2>       
         <div class="form-group">       
             <select class="form-control" name="model_brand"  required="required" >
-                <option disabled selected>Select a brand and model</option>
+                <option disabled selected value="">Select a brand and model</option>
                 {% for model in models %}
                     <option >{{ model.brand_model }}</option> 
                 {% endfor %}        
@@ -46,7 +46,7 @@ body{
         </div>
         <div class="form-group">       
             <select class="form-control" name="transmission"  required="required" >
-                <option disabled selected>Transmission</option>
+                <option disabled selected value="" >Transmission</option>
                 <option >Manual</option> 
                 <option >Automatic</option>                  
             </select>
@@ -60,7 +60,7 @@ body{
         </div>
         <div class="form-group">       
             <select class="form-control" name="drive_train"  required="required" >
-                <option disabled selected>Drive Train</option>
+                <option disabled selected value="">Drive Train</option>
                 <option >4x4</option> 
                 <option >front wheel</option>   
                 <option >rear wheel</option>                 
@@ -79,7 +79,7 @@ body{
 
         <div class="form-group">       
             <select class="form-control" name="type"  required="required" >
-                <option disabled selected>Type</option>
+                <option disabled selected value="">Type</option>
                 <option >automobile</option> 
                 <option >motorcycle</option>   
                 <option >truck</option>                 
