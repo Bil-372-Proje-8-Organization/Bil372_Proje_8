@@ -36,40 +36,44 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script>
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
+  $("#model_brand").val("{{vehicle.model_brand}}").change();
 </script>
 <div class="advert text-center"> </div>
 <div class="advert-form">
-  <form action = "" method = "post" class="form-signin">
+  <form action = "" method = "post" class="form-signin" style="margin-top:50px">
     <h2 class="text-center">Update Vehicle</h2>
 <div class="form-group">
-            <select class="form-control" name="model_brand"  required="required" >
-                <option disabled selected>Select a brand and model</option>
+            <select class="form-control" id ="model_brand" name="model_brand"  required="required" >
+                <option disabled selected value="" >Select a brand and model</option>
                 {% for model in models %}
                     <option >{{ model.brand_model }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="form-group">
-            <select class="form-control" name="transmission"  required="required" >
-                <option disabled selected>Transmission</option>
+            <select class="form-control" name="transmission"  required="required"  >
+                <option disabled selected value="">Transmission</option>
                 <option >Manual</option>
                 <option >Automatic</option>
             </select>
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" name="engine_size" placeholder="Engine Size" required="required" >
+            <label style="font-size:15px;"> Engine Size </label>
+            <input type="text" class="form-control" name="engine_size" placeholder="Engine Size" required="required" value="{{vehicle.engine_size}}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="package" placeholder="Package" required="required" >
+            <label style="font-size:15px;"> Package </label>
+            <input type="text" class="form-control" name="package" placeholder="Package" required="required" value="{{vehicle.package}}">
         </div>
         <div class="form-group">
-            <select class="form-control" name="drive_train"  required="required" >
-                <option disabled selected>Drive Train</option>
+            <select class="form-control" name="drive_train"  required="required"  >
+                <option disabled selected value="">Select drivetrain</option>
                 <option >4x4</option>
                 <option >front wheel</option>
                 <option >rear wheel</option>
@@ -77,18 +81,21 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" name="num_cylinder" placeholder="Cylinder" required="required" >
+            <label style="font-size:15px;"> Cylinder </label>
+            <input type="text" class="form-control" name="num_cylinder" placeholder="Cylinder" required="required" value="{{vehicle.num_cylinder}}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="power" placeholder="Power" required="required" >
+            <label style="font-size:15px;"> Power </label>
+            <input type="text" class="form-control" name="power" placeholder="Power" required="required" value="{{vehicle.power}}">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required" >
+            <label style="font-size:15px;"> Dealer Price </label>
+            <input type="text" class="form-control" name="dealer_price" placeholder="Dealer Price" required="required" value="{{vehicle.dealer_price}}">
         </div>
 
         <div class="form-group">
-            <select class="form-control" name="type"  required="required" >
-                <option disabled selected>Type</option>
+            <select class="form-control" name="type"  required >
+                <option disabled selected value="">Type</option>
                 <option >automobile</option>
                 <option >motorcycle</option>
                 <option >truck</option>

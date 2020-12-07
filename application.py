@@ -237,8 +237,8 @@ def editProfile(id):
   users_info= conn.execute(query).fetchone()
   return render_template('editProfile.html', users_info=users_info)
 
-@app.route("/edit_allVehicles/<int:no>", methods=['GET', 'POST'])
-def editAllVehicles(no):
+@app.route("/editVehicle/<int:no>", methods=['GET', 'POST'])
+def editVehicle(no):
   if request.method =='POST':
       values = {
       'model_brand':request.form['model_brand'],
@@ -253,10 +253,10 @@ def editAllVehicles(no):
       }
       query = update(Vehicle).where(Vehicle.c.vehicle_no == no).values(values)
       conn.execute(query)
-      return redirect(url_for('allVehicles'))
+      return redirect(url_for('vehicles'))
   query = select([Vehicle]).where(Vehicle.c.vehicle_no == no)
   vehicle = conn.execute(query).fetchone()
-  return render_template('editAllVehicles.html', vehicle=vehicle)
+  return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all())
 
 
 @app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
