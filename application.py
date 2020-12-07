@@ -178,7 +178,7 @@ def sellers_adverts(id):
         flash('Please login', 'danger')
         return redirect(url_for('login'))
 
-    return render_template("sellers_adverts.html", adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+    return render_template("sellers_adverts.html", adverts=db.session.query(Advert).filter_by(seller_id=id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 
 @app.route("/yourAdverts", methods=['GET', 'POST'])
