@@ -284,24 +284,6 @@ def editVehicle(no):
   vehicle = conn.execute(query).fetchone()
   return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all())
 
-#need some changes in database after that it is done
-'''
-@app.route("/addAdvert", methods=['GET', 'POST'])
-def addAdvert():
-  if request.method =='POST':
-      values = {
-      'seller_price':request.form['seller_price'],
-      'dealer_price':request.form['dealer_price'],
-      'swop':request.form['swop'],
-      'pre_owned':request.form['pre_owned']
-      }
-      ##counter must need to be increment in database
-      #ins = Advert.insert().values(7, values, current_user.id) 
-      flash('Inserted successfully!', 'success')
-      return redirect(url_for('addAdvert'))
-  query = select([Advert]).where(Advert.c.users_id == current_user.id)
-  adverts = conn.execute(query)
-  return redirect(url_for('your_adverts')) '''
 
 @app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
 def detailsAdvert(id):
