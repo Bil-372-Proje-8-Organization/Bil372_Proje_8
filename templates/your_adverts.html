@@ -93,12 +93,12 @@
                               {%endif%}
                             {%endfor%}
 
-                            <td>{{advert.date}}</td>
+                            <td>{{advert.ad_date}}</td>
                             <td>{{advert.seller_price}}</td>
 
                             {%for vehicle in vehicles%}
-                              {%if advert.brand_model_no == vehicle.vehicle_no%}
-                                <td>{{vehicle.model_brand}}</td>
+                              {%if advert.vehicle_no == vehicle.vehicle_no%}
+                                <td>{{vehicle.brand_model}}</td>
                               {%endif%}
                             {%endfor%}
 
@@ -112,7 +112,7 @@
                                 <a href="{{url_for('editAdvert', id=advert.ad_no)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
                             </td>
                             <td class="text-left">
-                                <a href="{{url_for('deleteAdvert', id=advert.ad_no)}}" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
+                                <a href="{{url_for('deleteAdvert', id=advert.ad_no)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
                             </td>
                         </tr>
                     {%endfor%}
@@ -128,3 +128,4 @@
 
 
 {% endblock %}
+
