@@ -108,6 +108,9 @@
                             <td>{{advert.second_hand}}</td>
                             <td>{{advert.warranty}}</td>
                             <td>{{advert.exchange}}</td>
+                            <td class="align-middle">
+                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-info" >Click For Details</a>
+                            </td>
                             <td class="text-right">
                                 <a href="{{url_for('editAdvert', id=advert.ad_no)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
                             </td>
