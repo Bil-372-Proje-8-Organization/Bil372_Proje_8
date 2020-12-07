@@ -4,19 +4,24 @@
 {% block title %}Login {% endblock %}
 
 {% block content %}
-    <h2>Login now!</h2>
-    <p>Enter you username and password</p>
+<body>
+    <div style="width:800px; margin:0 auto;">
+      <h2>Login now!</h2>
+      <p>Enter you username and password</p>
 
-    <form action="{{ url_for('login') }}", method="POST">
-        {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
-        {{ displayField(form.hashed_pswd, 'Password') }}
-        <div class="form-group">
-            <input type="submit" value="Login" class="btn btn-warning">
-        </div>
-        {{ form.csrf_token }}
-    </form>
+      <form action="{{ url_for('login') }}", method="POST">
+          {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
+          {{ displayField(form.hashed_pswd, 'Password') }}
+          <div class="form-group">
+              <input type="submit" value="Login" class="btn btn-warning">
+          </div>
+          {{ form.csrf_token }}
+      </form>
 
-    <hr>
+      <hr>
 
-    <p>Haven't registered yet? <a href={{url_for('index')}}>Click here</a> to register.</p>
+      <p>Haven't registered yet? <a href={{url_for('index')}}>Click here</a> to register.</p>
+    </div>
+</body>
+
 {% endblock %}
