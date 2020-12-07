@@ -4,20 +4,24 @@
 {% block title %}Register {% endblock title%}
 
 {% block content %}
-        <h2>Get started!</h2>
-        <p>First time here? Register</p>
-
-        <form action="{{ url_for('index') }}", method="POST">
-            {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
-            {{ displayField(form.hashed_pswd, 'Password') }}
-            {{ displayField(form.confirm_pswd, 'Confirm password') }}
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-warning">
-            </div>
-            {{ form.csrf_token }}
-        </form>
-
-        <hr>
-
-        <p>Already registered? <a href={{url_for('login')}}>Click here</a> to login.</p>
+<body>
+  <div style="width:800px; margin:0 auto;">
+    <h2>Get started!</h2>
+    <p>First time here? Register</p>
+    
+    <form action="{{ url_for('index') }}", method="POST">
+      {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
+      {{ displayField(form.hashed_pswd, 'Password') }}
+      {{ displayField(form.confirm_pswd, 'Confirm password') }}
+      <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-warning">
+      </div>
+      {{ form.csrf_token }}
+    </form>
+    
+    <hr>
+    
+    <p>Already registered? <a href={{url_for('login')}}>Click here</a> to login.</p>
+  </div>
+</body>
 {% endblock %}
