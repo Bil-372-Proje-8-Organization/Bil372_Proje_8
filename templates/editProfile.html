@@ -67,12 +67,12 @@
 
     <div class="form-group">
       <label style="font-size:15px;"> Phone </label>
-      <input type="number" class="form-control" name="phone" placeholder="Phone" required="required" autofocus value="{{users_info.phone}}" >
+      <input type="number" class="form-control" name="phone" placeholder="0-5XX-XXX-XXXX" required="required" autofocus pattern="0-5[0|3-5][0-9]-[0-9]{3}-[0-9]{4}" value="{{users_info.phone}}" >
     </div>
 
     <div class="form-group">
       <label style="font-size:15px;"> Mail </label>
-      <input type="text" class="form-control" name="mail" placeholder="mail" required="required"  value="{{users_info.mail}}">
+      <input type="text" class="form-control" name="mail" placeholder="mail" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value="{{users_info.mail}}">
     </div>
 
     <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
