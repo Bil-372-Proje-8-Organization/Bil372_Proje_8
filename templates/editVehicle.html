@@ -50,9 +50,15 @@
 <div class="form-group">
             <select class="form-control" id ="model_brand" name="brand_model"  required="required" >
                 <option disabled selected value="" >Select a brand and model</option>
-                {% for model in models %}
-                    <option >{{ model.brand_model }}</option>
-                {% endfor %}
+                {% for brand in brands %}
+                    <optgroup label="{{brand}}">
+                        {% for model in models %}
+                            {%if model.brand_model.split("-")[0] == brand %}
+                                <option >{{ model.brand_model }}</option>
+                            {%endif%}
+                        {%endfor%}         
+                    </optgroup>
+                {% endfor %}      
             </select>
         </div>
         <div class="form-group">

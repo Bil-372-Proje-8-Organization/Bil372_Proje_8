@@ -38,17 +38,18 @@ body{
         <h2 class="text-center">Add new Advertisement</h2>
 
 
-         <div class="form-group">
-            <label style="font-size:15px;"> Seller Price </label>
-            <input type="text" class="form-control" name="seller_price"  required="required" autofocus >
-        </div>
-
         <div class="form-group">       
             <select class="form-control" name="brand_model"  required="required" autofocus >
                 <option disabled selected value="">Select a brand and model</option>
-                {% for model in models %}
-                    <option >{{ model.brand_model }}</option> 
-                {% endfor %}        
+                {% for brand in brands %}
+                    <optgroup label="{{brand}}">
+                        {% for model in models %}
+                            {%if model.brand_model.split("-")[0] == brand %}
+                                <option >{{ model.brand_model }}</option>
+                            {%endif%}
+                        {%endfor%}         
+                    </optgroup>
+                {% endfor %}            
             </select>
         </div>
 
@@ -102,7 +103,10 @@ body{
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
 
-
+            <div class="form-group">
+                <label style="font-size:15px;"> Seller Price </label>
+                <input type="text" class="form-control" name="seller_price"  required="required" autofocus >
+            </div>
            <div>
                 <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Add</button>
             </div>

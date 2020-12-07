@@ -142,8 +142,9 @@ def addVehicle():
         query = Vehicle.insert().values(values)
         conn.execute(query)
         return redirect(url_for('vehicles'))  
-
-    return render_template('newVehicle.html', models=db.session.query(Model).all())    
+    tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+    brands = [x[0] for x in tuples]
+    return render_template('newVehicle.html', models=db.session.query(Model).all(), brands=brands)    
 
 @app.route("/newAdvert", methods=['GET', 'POST'])
 def newAdvert():
@@ -168,8 +169,9 @@ def newAdvert():
         query = Advert.insert().values(values)
         conn.execute(query)
         return redirect(url_for('adverts'))
-
-    return render_template("newAdvert.html", id=current_user.id, models=db.session.query(Model).all())
+    tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+    brands = [x[0] for x in tuples]
+    return render_template("newAdvert.html", id=current_user.id, models=db.session.query(Model).all(), brands=brands)
 
 
 @app.route("/yourAdverts", methods=['GET', 'POST'])
@@ -265,25 +267,29 @@ def editProfile(id):
 
 @app.route("/editVehicle/<int:no>", methods=['GET', 'POST'])
 def editVehicle(no):
-  if request.method =='POST':
-      values = {
-      'brand_model':request.form['brand_model'],
-      'transmission':request.form['transmission'],
-      'engine_size':request.form['engine_size'],
-      'package':request.form['package'],
-      'drive_train':request.form['drive_train'],
-      'num_cylinder':request.form['num_cylinder'],
-      'power':request.form['power'],
-      'dealer_price':request.form['dealer_price'],
-      'type':request.form['type'],
-      'year':request.form['year'],
-      }
-      query = update(Vehicle).where(Vehicle.c.vehicle_no == no).values(values)
-      conn.execute(query)
-      return redirect(url_for('vehicles'))
-  query = select([Vehicle]).where(Vehicle.c.vehicle_no == no)
-  vehicle = conn.execute(query).fetchone()
-  return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all())
+
+    if request.method =='POST':
+
+        values = {
+        'brand_model':request.form['brand_model'],
+        'transmission':request.form['transmission'],
+        'engine_size':request.form['engine_size'],
+        'package':request.form['package'],
+        'drive_train':request.form['drive_train'],
+        'num_cylinder':request.form['num_cylinder'],
+        'power':request.form['power'],
+        'dealer_price':request.form['dealer_price'],
+        'type':request.form['type'],
+        'year':request.form['year'],
+        }
+        query = update(Vehicle).where(Vehicle.c.vehicle_no == no).values(values)
+        conn.execute(query)
+        return redirect(url_for('vehicles'))
+    query = select([Vehicle]).where(Vehicle.c.vehicle_no == no)
+    vehicle = conn.execute(query).fetchone()
+    tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+    brands = [x[0] for x in tuples]
+    return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all(), brands=brands)
 
 
 @app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
