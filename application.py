@@ -28,7 +28,7 @@ Users_info = db.Table('users_info', db.metadata, autoload=True, autoload_with=db
 Brand = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
 Vehicle = db.Table('vehicle', db.metadata, autoload=True, autoload_with=db.engine)
 Model = db.Table('model', db.metadata, autoload=True, autoload_with=db.engine)
-
+City = db.Table('city', db.metadata, autoload=True, autoload_with=db.engine)
 
 
 
@@ -107,7 +107,7 @@ def addProfile(username):
         query = Users_info.insert().values(values)
         conn.execute(query)
         return redirect(url_for('login'))
-    return render_template("newProfile.html")
+    return render_template("newProfile.html", cities=db.session.query(City).all())
 
 @app.route("/addBrand", methods=['GET', 'POST'])
 def addBrand():
