@@ -44,6 +44,13 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+                        {%if filter %}
+                            <i class="fas fa-home" style="margin-left:10px;"></i>
+                            <a href="{{url_for('home')}}" style="color: #335177"><span>Main Page</span></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        {%endif%}
 
                     </div>
 
@@ -53,7 +60,9 @@
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
                             </li>
-                            
+                            <li class="nav-item">
+                              <a  class="nav-link" href="{{ url_for('filter') }}"><span style="color: #335177">Filter</span></a>
+                          </li>
                             <!-- Logout -->
                             <li class="nav-item">
                                 <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
@@ -66,8 +75,11 @@
 
             <!-- Main section start -->
             <div >
+              {%if filter %}
+              <h2 class="text-center" style="margin-top:50px; font-family: 'Stencil Std',  fantasy";>Active Adverts By filter</h2>
+              {%else%}
               <h2 class="text-center" style="margin-top:50px; font-family: 'Stencil Std',  fantasy";>Active Adverts</h2>
-                <table class="table table-hover" >
+              {%endif%}                <table class="table table-hover" >
                   <thead>
                     <tr>
                       <th scope="col">Model</th>
@@ -84,38 +96,25 @@
                   {%for advert in adverts%}
                       <tr>
 
-                          {%for vehicle in vehicles%}
-                            {%if advert.vehicle_no == vehicle.vehicle_no%}
-                              <td>{{vehicle.brand_model}}</td>
-                            {%endif%}
-                          {%endfor%}
-
-                          {%for vehicle in vehicles%}
-                            {%if advert.vehicle_no == vehicle.vehicle_no%}
-                              <td>{{vehicle.transmission}}</td>
-                            {%endif%}
-                          {%endfor%}
-
-                          {%for vehicle in vehicles%}
-                            {%if advert.vehicle_no == vehicle.vehicle_no%}
-                              <td>{{vehicle.package}}</td>
-                            {%endif%}
-                          {%endfor%}
-
-                          <td>{{advert.color}}</td>
-                          <td>{{advert.km}}</td>
-                          <td>{{advert.second_hand}}</td>
-                          <td>{{advert.seller_price}}</td>
-
-                          {%for Users_info in Users_info%}
-                            {%if Users_info.users_id == advert.seller_id%}
-                              <td>{{Users_info.name}}</td>
-                            {%endif%}
-                          {%endfor%}
-
-                          <td class="align-middle">
-                            <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-info" >Click For Details</a>
-                          </td>
+                        {%for vehicle in vehicles%}
+                          {%if advert.vehicle_no == vehicle.vehicle_no%}
+                            <td>{{vehicle.brand_model}}</td>
+                            <td>{{vehicle.transmission}}</td>
+                            <td>{{vehicle.package}}</td>
+                            <td>{{advert.color}}</td>
+                            <td>{{advert.km}}</td>
+                            <td>{{advert.second_hand}}</td>
+                            <td>{{advert.seller_price}}</td>
+                            {%for Users_info in Users_info%}
+                                {%if Users_info.users_id == advert.seller_id%}
+                                    <td>{{Users_info.name}}</td>
+                                {%endif%}
+                            {%endfor%}
+                            <td class="align-middle">
+                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
+                            </td>
+                          {%endif%}
+                        {%endfor%}
                       </tr>
                   {%endfor%}
                   </tbody>

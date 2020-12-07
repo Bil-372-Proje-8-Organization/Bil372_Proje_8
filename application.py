@@ -91,8 +91,8 @@ def home():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
     if current_user.username == 'admin':
-        return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
-    return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+        return render_template("adminHome.html", filter=False ,username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+    return render_template("home.html",  filter=False,username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 @app.route("/addProfile/<username>", methods=['GET', 'POST'])
 def addProfile(username):
@@ -311,8 +311,11 @@ def filter():
         query = select([Advert]).where(and_(Advert.c.seller_price <= max_price, Advert.c.seller_price >= min_price))
         adverts = conn.execute(query).fetchall()
         query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['brand_model']))
-        vehicles = conn.execute(query).fetchall()    
-        return render_template("filteradminHome.html", username=current_user.username,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+        vehicles = conn.execute(query).fetchall()
+        if current_user.username == 'admin':    
+            return render_template("adminHome.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+        else:
+            return render_template("Home.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
 
 
     return render_template('filter.html' , models=db.session.query(Model).all())
