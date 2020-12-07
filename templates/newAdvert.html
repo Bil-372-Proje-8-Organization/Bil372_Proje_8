@@ -43,9 +43,9 @@ body{
                 <option disabled selected value="">Select a brand and model</option>
                 {% for brand in brands %}
                     <optgroup label="{{brand}}">
-                        {% for model in models %}
-                            {%if model.brand_model.split("-")[0] == brand %}
-                                <option >{{ model.brand_model }}</option>
+                        {% for vehicle in vehicles %}
+                            {%if vehicle.brand_model.split("-")[0] == brand %}
+                                <option value="{{vehicle.vehicle_no}}">{{ vehicle.brand_model }}:{{vehicle.package}}:{{vehicle.transmission}}</option>
                             {%endif%}
                         {%endfor%}         
                     </optgroup>
@@ -69,19 +69,8 @@ body{
             <input type="number" class="form-control" name="damage"  required="required" autofocus >
         </div>
 
-        <label style="font-size:15px;"> Is 2nd hand? </label>
 
-            <div class="form-check form-check-inline" style="margin-left:15px">
-                <input class="form-check-input" type="radio" name="second_hand" value="Yes" checked>
-                <label class="form-check-label" for="inlineRadio1">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="second_hand"  value="No">
-                <label class="form-check-label" for="inlineRadio2">No</label>
-            </div>
-
-
-        <label style="font-size:15px; margin-left:50px;"> Exchange? </label>
+        <label style="font-size:15px; "> Exchange? </label>
 
             <div class="form-check form-check-inline" style="margin-left:15px">
                     <input class="form-check-input" type="radio" name="exchange"  value="Yes" checked>
@@ -91,6 +80,17 @@ body{
                 <input class="form-check-input" type="radio" name="exchange"  value="No">
                 <label class="form-check-label" for="inlineRadio2">No</label>
             </div>
+
+            <label style="font-size:15px;margin-left:50px;"> Is 2nd hand? </label>
+
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" checked>
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="second_hand"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>    
 
         <label style="font-size:15px;"> Warranty? </label>
 

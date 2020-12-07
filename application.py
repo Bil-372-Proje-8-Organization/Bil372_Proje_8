@@ -152,13 +152,12 @@ def newAdvert():
         flash('Please login', 'danger')
         return redirect(url_for('login'))
     if request.method =='POST':
-        brand_model=request.form['brand_model']
         date=datetime.today()
         values = {
         'seller_id':db.session.query(User).filter_by(username=current_user.username).with_entities(User.id).first(),
         'ad_date':date,
         'seller_price':request.form['seller_price'],
-        'vehicle_no':db.session.query(Vehicle).filter_by(brand_model=brand_model).with_entities(Vehicle.c.vehicle_no).first(),
+        'vehicle_no':request.form['brand_model'],
         'km': request.form['km'],
         'color': request.form['color'],
         'damage': request.form['damage'],
@@ -171,7 +170,7 @@ def newAdvert():
         return redirect(url_for('adverts'))
     tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
     brands = [x[0] for x in tuples]
-    return render_template("newAdvert.html", id=current_user.id, models=db.session.query(Model).all(), brands=brands)
+    return render_template("newAdvert.html", id=current_user.id, vehicles=db.session.query(Vehicle).all(), brands=brands)
 
 
 @app.route("/yourAdverts", methods=['GET', 'POST'])
@@ -244,7 +243,9 @@ def editAdvert(id):
       return redirect(url_for('your_adverts'))  
   query = select([Advert]).where(Advert.c.ad_no == id)
   advert= conn.execute(query).fetchone()
-  return render_template('editAdvert.html', advert=advert)
+  tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+  brands = [x[0] for x in tuples]
+  return render_template('editAdvert.html', advert=advert, brands=brands,  vehicles=db.session.query(Vehicle).all() )
 
 
 @app.route("/edit_profile/<int:id>", methods=['GET', 'POST'])

@@ -44,11 +44,22 @@ $( function() {
 <div class="advert text-center"> </div>
 <div class="advert-form">
     <form action = "" method = "post" class="form-signin">
-        <h2 class="text-center">Update Advert</h2>       
-        <div class="form-group">
-            <label style="font-size:15px;"> Seller Price </label>
-            <input type="text" class="form-control" name="seller_price" placeholder="{{advert.seller_price}}" required="required" autofocus value="{{advert.seller_price}}" >
+        <h2 class="text-center">Update Advert</h2> 
+        <div class="form-group">       
+            <select class="form-control" name="brand_model"  required="required" autofocus >
+                <option disabled selected value="">Select a brand and model</option>
+                {% for brand in brands %}
+                    <optgroup label="{{brand}}">
+                        {% for vehicle in vehicles %}
+                            {%if vehicle.brand_model.split("-")[0] == brand %}
+                                <option value="{{vehicle.vehicle_no}}">{{ vehicle.brand_model }}:{{vehicle.package}}:{{vehicle.transmission}}</option>
+                            {%endif%}
+                        {%endfor%}         
+                    </optgroup>
+                {% endfor %}            
+            </select>
         </div>
+              
 
         <div class="form-group">
             <label style="font-size:15px;"> Kilometers </label>
@@ -65,7 +76,7 @@ $( function() {
             <input type="text" class="form-control" name="color" placeholder="color" required="required" autofocus value="{{advert.color}}" >
         </div>
 
-        <!--Explicity put here if we want we can remove it-->
+        <!--Explicity put here if we want we can remove it
         <div class="form-group">
             <label style="font-size:15px;"> Model </label>
             <div>
@@ -81,9 +92,9 @@ $( function() {
                 $('#yearpicker').append($('<option />').val(i).html(i));
                 }
                 </script>
-                <!-- <input id="datepicker" type="date" data-date="" data-date-format="YYYY" class="form-control" name="start_date" placeholder="Start Date" required="required" > -->
+                 <input id="datepicker" type="date" data-date="" data-date-format="YYYY" class="form-control" name="start_date" placeholder="Start Date" required="required" > 
             </div>
-        </div>
+        </div>-->
         
             
         <label style="font-size:15px;"> Exchange? </label>
@@ -136,7 +147,39 @@ $( function() {
             
            
         {%endif%}
-                <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
+
+        <label style="font-size:15px;"> Warranty? </label>
+        {%if advert.warranty.lower() == 'yes'%}
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" checked>
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>  
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="second_hand"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+           
+        {%else%}
+        
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" >
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>  
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="second_hand"  value="No" checked>
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+            
+           
+        {%endif%}
+
+        <div class="form-group">
+            <label style="font-size:15px;"> Seller Price </label>
+            <input type="text" class="form-control" name="seller_price" placeholder="{{advert.seller_price}}" required="required" autofocus value="{{advert.seller_price}}" >
+        </div>
+
+        <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Update</button>
             </div>
         
             
