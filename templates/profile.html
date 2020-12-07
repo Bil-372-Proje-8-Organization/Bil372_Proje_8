@@ -2,21 +2,45 @@
 {% block head %}
     <title> Profile </title>
     <style>
-        .error {
+    .error {
         font-size:18px;
         color:#cc0000;
         margin-top:30px
     }
+
+    .bg-c-lite-green {
+        background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
+         background: linear-gradient(to right, #8beabe, #040fd7)
+    }
+    nav{
+         background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
+         background: linear-gradient(to right, #8beabe, #040fd7)
+    }
+    table {
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+    }
     td {
     text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
     }
     th {
-    text-align: center;
+        text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+    }
+
+    div {
+        padding: 25px 50px 75px 100px;
     }
 
     .table td th {
-    text-align: center;
+        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)
+        text-align: center;
     }
+
     </style>
 
 {% endblock %}
@@ -27,13 +51,15 @@
         <p class="error text-center">{{ messages[0] }}</p>
     {% endif %}
     {% endwith %}
+
+
             <!-- Nav bar start -->
             <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
                 <div class="container-fluid">
                     <div  class="cursor-pointer">
                         <!-- Add a new ad -->
                         <i class="fas fa-plus"></i>
-                        <a href="#" style="color: #335177"><span>New advert</span></a>
+                        <a href="{{ url_for('newAdvert') }}" style="color: #335177"><span>New advert</span></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -63,40 +89,69 @@
             </nav>
             <!-- Nav bar end -->
 
+
+          <tbody>
+                   <table class="navbar navbar-expand-sm navbar-light fixed-top" style="margin-left:600px; width:100px;">
+
+
+
+                    <div style=" background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7));
+        background: linear-gradient(to right, #8beabe, #040fd7)">
+                        <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" style=" margin-left:600px; margin-top:50px; " alt="User-Profile-Image">
+                    </div>
+
+
+            </table>
+
             <!-- Main section start -->
-            <div >
-                <table class="table table-hover" style="margin-top:50px;">
-                    <thead>
-                    <tr>
-                      <th scope="col">User ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Surname</th>
-                      <th scope="col">city</th>
-                      <th scope="col">District</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Mail</th>
-                      <th scope="col">Score</th>
-                      <th scope="col">username</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+            <div style=" background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7));
+        background: linear-gradient(to right, #8beabe, #040fd7)">
+                <table class="table table-hover" style="margin-top:0px; margin-bottom:0px; background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+        background: linear-gradient(to right, #ee5a6f, #f29263)" >
+
+
                   {%for Users_info in Users_info%}
                       <tr>
+                          <th scope="col">User ID</th>
                           <th scope="row">{{Users_info.users_id}}</th>
+                      </tr>
+                      <tr>
+                          <th scope="col">Name</th>
                           <td>{{Users_info.name}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">Surname</th>
                           <td>{{Users_info.surname}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">city</th>
                           <td>{{Users_info.city}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">District</th>
                           <td>{{Users_info.district}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">Phone</th>
                           <td>{{Users_info.phone}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">Mail</th>
                           <td>{{Users_info.mail}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">Score</th>
                           <td>{{Users_info.score}}</td>
+                      </tr>
+                      <tr>
+                          <th scope="col">username</th>
                           <td>{{Users_info.username}}</td>
-                          <td class="text-right">
-                              <a href="{{url_for('editProfile', id=Users_info.users_id)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
-                          </td>
+                      </tr>
+                      <tr>
+                              <a href="{{url_for('editProfile', id=Users_info.users_id)}}" class="btn btn-outline-warning" style="margin-left:600px; width:100px;" >Edit</a>
+
                       </tr>
                   {%endfor%}
-                  </tbody>
                   </table>
 
             </div>
