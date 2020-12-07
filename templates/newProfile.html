@@ -46,7 +46,12 @@ body{
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" name="city" placeholder="City " required="required" autofocus  >
+          <select class="form-control" name="city"  required="required" >
+              <option disabled selected value="">Select a city</option>
+              {% for city in cities %}
+                  <option >{{ city.city_name }}</option>
+              {% endfor %}
+          </select>
       </div>
 
       <div class="form-group">
