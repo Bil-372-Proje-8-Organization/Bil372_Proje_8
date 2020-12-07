@@ -171,6 +171,14 @@ def newAdvert():
 
     return render_template("newAdvert.html", id=current_user.id, models=db.session.query(Model).all())
 
+@app.route("/sellers_adverts/<int:id>", methods=['GET', 'POST'])
+def sellers_adverts(id):
+    if not current_user.is_authenticated:
+        flash('Please login', 'danger')
+        return redirect(url_for('login'))
+
+    return render_template("sellers_adverts.html", adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+
 
 @app.route("/yourAdverts", methods=['GET', 'POST'])
 def adverts():
