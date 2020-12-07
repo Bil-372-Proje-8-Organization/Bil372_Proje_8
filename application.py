@@ -55,7 +55,7 @@ def index():
         db.session.commit()
 
         flash('User created successfully. Now, please add personal info', 'success')
-        return redirect(url_for('addProfile'))
+        return redirect(url_for('addProfile', username=username))
 
     return render_template("index.html", form=reg_form)
 
@@ -92,11 +92,11 @@ def home():
         return render_template("adminHome.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
     return render_template("home.html", username=current_user.username,  adverts=db.session.query(Advert).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
-@app.route("/addProfile", methods=['GET', 'POST'])
-def addProfile():
+@app.route("/addProfile/<username>", methods=['GET', 'POST'])
+def addProfile(username):
     if request.method =='POST':
         values = {
-        'users_id':current_user.id,
+        'users_id':db.session.query(User).filter_by(username=username).with_entities(User.id).first(),
         'name':request.form['name'],
         'surname': request.form['surname'],
         'city':request.form['city'],
