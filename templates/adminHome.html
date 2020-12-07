@@ -103,39 +103,52 @@
                 <table class="table table-hover" >
                     <thead>
                       <tr>
-                        <th scope="col">Model</th>
-                        <th scope="col">Transmission</th>
-                        <th scope="col">Package</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Km</th>
-                        <th scope="col">Pre-owned</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Seller</th>
+                      <th scope="col">Model</th>
+                      <th scope="col">Package</th>
+                      <th scope="col">Transmission</th>
+
+                      <th scope="col">Color</th>
+                      <th scope="col">Km</th>
+                      <th scope="col">Year</th>
+
+                      <th scope="col">Price</th>
+                      <th scope="col">Seller</th>
+
+                      <th scope="col">Date of advert</th>
                       </tr>
                     </thead>
                     <tbody>
                     {%for advert in adverts%}    
-                        <tr>
-                            {%for vehicle in vehicles%}
-                                {%if advert.vehicle_no == vehicle.vehicle_no%}
-                                    <td>{{vehicle.brand_model}}</td>
-                                    <td>{{vehicle.transmission}}</td>
-                                    <td>{{vehicle.package}}</td>
-                                    <td>{{advert.color}}</td>
-                                    <td>{{advert.km}}</td>
-                                    <td>{{advert.second_hand}}</td>
-                                    <td>{{advert.seller_price}}</td>
-                                    {%for Users_info in Users_info%}
-                                        {%if Users_info.users_id == advert.seller_id%}
-                                            <td>{{Users_info.name}}</td>
-                                        {%endif%}
-                                    {%endfor%}
-                                    <td class="align-middle">
-                                        <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
-                                    </td>
+                      <tr>
+
+                        {%for vehicle in vehicles%}
+                          {%if advert.vehicle_no == vehicle.vehicle_no%}
+                            <td>{{vehicle.brand_model}}</td>
+                            <td>{{vehicle.package}}</td>
+                            <td>{{vehicle.transmission}}</td>
+
+                            <td>{{advert.color}}</td>
+                            <td>{{advert.km}}</td>
+                            <td>{{vehicle.year}}</td>
+
+
+                            <td>{{advert.seller_price}}</td>
+                            {%for Users_info in Users_info%}
+                                {%if Users_info.users_id == advert.seller_id%}
+                                    <td>{{Users_info.name}}</td>
                                 {%endif%}
                             {%endfor%}
-                        </tr>
+
+                            <td>{{advert.ad_date}}</td>
+
+                            <td class="align-middle">
+                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
+                            </td>
+
+
+                          {%endif%}
+                        {%endfor%}
+                      </tr>
                     {%endfor%}   
                     </tbody>
                   </table>
