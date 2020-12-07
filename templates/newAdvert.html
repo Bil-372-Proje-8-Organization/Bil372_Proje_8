@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block head %} 
+<style>
+.error {
+    font-size:18px;
+    color:#cc0000; 
+    margin-top:30px
+}
+.form-group {
+    margin-bottom: 10px;
+}
+.advert-form {
+    width: 500px;
+    margin: 8px auto;
+    font-size: 15px;
+}
+.advert-form form {
+    margin-bottom: 10px;
+    background: #ffffff;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+}
+.advert-form h2 {
+    margin: 0 0 5 5px;
+}
+
+body{
+    background: #f7f7f7;
+}
+</style>
+{%endblock%}
+
+{% block body %}
+
+<div class="advert text-center"> </div>
+<div class="advert-form">
+    <form action = "" method = "post" class="form-signin" style="margin-top:100px">
+        <h2 class="text-center">Add new Advertisement</h2>
+
+
+         <div class="form-group">
+            <label style="font-size:15px;"> Seller Price </label>
+            <input type="text" class="form-control" name="seller_price"  required="required" autofocus >
+        </div>
+
+        <div class="form-group">       
+            <select class="form-control" name="brand_model"  required="required" autofocus >
+                <option disabled selected value="">Select a brand and model</option>
+                {% for model in models %}
+                    <option >{{ model.brand_model }}</option> 
+                {% endfor %}        
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label style="font-size:15px;"> Kilometers </label>
+            <input type="number" class="form-control" name="km"  required="required" autofocus >
+        </div>
+
+         <div class="form-group">
+            <label style="font-size:15px;"> Color </label>
+            <input type="text" class="form-control" name="color"  required="required" autofocus >
+        </div>
+
+         <div class="form-group">
+            <label style="font-size:15px;"> Damage </label>
+            <input type="number" class="form-control" name="damage"  required="required" autofocus >
+        </div>
+
+        <label style="font-size:15px;"> Is 2nd hand? </label>
+
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="second_hand" value="Yes" checked>
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="second_hand"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+
+
+        <label style="font-size:15px; margin-left:50px;"> Exchange? </label>
+
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                    <input class="form-check-input" type="radio" name="exchange"  value="Yes" checked>
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="exchange"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+
+        <label style="font-size:15px;"> Warranty? </label>
+
+            <div class="form-check form-check-inline" style="margin-left:15px">
+                <input class="form-check-input" type="radio" name="warranty" value="Yes" checked>
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="warranty"  value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+
+
+           <div>
+                <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Add</button>
+            </div>
+        
+            
+    </form>
+    
+</div>
+
+{%endblock%}
+
