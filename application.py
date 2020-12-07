@@ -3,6 +3,7 @@ import time
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from sqlalchemy import select,update, and_
+from datetime import datetime, date, timedelta
 #from flask_socketio import SocketIO, join_room, leave_room, send
 
 from wtform_fields import *
@@ -142,6 +143,39 @@ def addVehicle():
         return redirect(url_for('vehicles'))  
 
     return render_template('newVehicle.html', models=db.session.query(Model).all())    
+
+@app.route("/newAdvert", methods=['GET', 'POST'])
+def newAdvert():
+    if not current_user.is_authenticated:
+        flash('Please login', 'danger')
+        return redirect(url_for('login'))
+    if request.method =='POST':
+        brand_model=request.form['brand_model']
+        date=datetime.today()
+        values = {
+        'seller_id':db.session.query(User).filter_by(username=current_user.username).with_entities(User.id).first(),
+        'ad_date':date,
+        'seller_price':request.form['seller_price'],
+        'vehicle_no':db.session.query(Vehicle).filter_by(brand_model=brand_model).with_entities(Vehicle.c.vehicle_no).first(),
+        'km': request.form['km'],
+        'color': request.form['color'],
+        'damage': request.form['damage'],
+        'second_hand': request.form['second_hand'],
+        'warranty': request.form['warranty'],
+        'exchange': request.form['exchange'],
+        }
+        query = Advert.insert().values(values)
+        conn.execute(query)
+        return redirect(url_for('adverts'))
+
+    return render_template("newAdvert.html", id=current_user.id, models=db.session.query(Model).all())
+
+
+@app.route("/yourAdverts", methods=['GET', 'POST'])
+def adverts():
+    return render_template("your_adverts.html", id=current_user.id, adverts=db.session.query(Advert).filter_by(seller_id=current_user.id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
+
+ 
 
 @app.route("/allBrands", methods=['GET', 'POST'])
 def brands():
