@@ -146,6 +146,18 @@ def addVehicle():
 def brands():
     return render_template('allBrands.html', brands=db.session.query(Model).all())
 
+@app.route("/deleteBrand/<brand_model>")
+def deleteBrand(brand_model):
+  query = Model.delete().where(Model.c.brand_model == brand_model)
+  conn.execute(query)
+  return redirect(url_for('brands'))
+
+@app.route("/deleteVehicle/<vehicle_no>")
+def deleteVehicle(vehicle_no):
+  query = Vehicle.delete().where(Vehicle.c.vehicle_no == vehicle_no)
+  conn.execute(query)
+  return redirect(url_for('vehicles'))  
+
 @app.route("/allVehicles", methods=['GET', 'POST'])
 def vehicles():
     return render_template('allVehicles.html', vehicles=db.session.query(Vehicle).all())    

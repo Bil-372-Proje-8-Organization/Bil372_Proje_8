@@ -92,8 +92,7 @@
                             <td>{{brand.brand_name}}</td>
                             <td>{{brand.model_name}}</td>
                             <td class="align-middle">
-                              <a href="#" class="btn btn-outline-success" >Update</a>
-                              <a href="#" class="btn btn-outline-danger" >Delete</a>
+                              <a href="{{url_for('deleteBrand', brand_model= brand.brand_model)}}" class="btn btn-outline-danger" >Delete</a>
                             </td>
                         </tr>
                     {%endfor%}   

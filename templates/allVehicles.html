@@ -107,7 +107,7 @@
                             <td>{{vehicle.type}}</td>
                             <td class="align-middle">
                                 <a href="{{url_for('editVehicle', no=vehicle.vehicle_no)}}" class="btn btn-outline-success" >Update</a>
-                                <a href="#" class="btn btn-outline-danger" >Delete</a>
+                                <a href="{{url_for('deleteVehicle', vehicle_no= vehicle.vehicle_no)}}" class="btn btn-outline-danger" >Delete</a>
                             </td>
                         </tr>
                     {%endfor%}   
