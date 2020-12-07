@@ -69,56 +69,53 @@
                 <table class="table table-hover" style="margin-top:50px;">
                     <thead>
                       <tr>
-                        <th scope="col">Ad_no</th>
-                        <th scope="col">Seller id</th>
-                        <th scope="col">Advert Date</th>
-                        <th scope="col">Seller Price</th>
-                        <th scope="col">Brand model</th>
-                        <th scope="col">KM</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Package</th>
+                        <th scope="col">Transmission</th>
+
                         <th scope="col">Color</th>
-                        <th scope="col">Damage</th>
-                        <th scope="col">Second-hand</th>
-                        <th scope="col">Warranty</th>
-                        <th scope="col">Is second hand?</th>
+                        <th scope="col">Km</th>
+                        <th scope="col">Year</th>
+
+                        <th scope="col">Price</th>
+
+                        <th scope="col">Date of advert</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {%for advert in adverts%}
-                        <tr>
-                            <th scope="row">{{advert.ad_no}}</th>
-
-                            {%for Users_info in Users_info%}
-                              {%if Users_info.users_id == advert.seller_id%}
-                                <td>{{Users_info.name}}</td>
-                              {%endif%}
-                            {%endfor%}
-
-                            <td>{{advert.ad_date}}</td>
-                            <td>{{advert.seller_price}}</td>
+                      {%for advert in adverts%}
+                          <tr>
 
                             {%for vehicle in vehicles%}
                               {%if advert.vehicle_no == vehicle.vehicle_no%}
                                 <td>{{vehicle.brand_model}}</td>
+                                <td>{{vehicle.package}}</td>
+                                <td>{{vehicle.transmission}}</td>
+
+                                <td>{{advert.color}}</td>
+                                <td>{{advert.km}}</td>
+                                <td>{{vehicle.year}}</td>
+
+
+                                <td>{{advert.seller_price}}</td>
+
+                                <td>{{advert.ad_date}}</td>
+
+                                <td class="align-middle">
+                                  <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-info" >Click For Details</a>
+                                </td>
+                                <td class="text-right">
+                                  <a href="{{url_for('editAdvert', id=advert.ad_no)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
+                                </td>
+                                <td class="text-left">
+                                  <a href="{{url_for('deleteAdvert', id=advert.ad_no)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
+                                </td>
+
+
                               {%endif%}
                             {%endfor%}
-
-                            <td>{{advert.km}}</td>
-                            <td>{{advert.color}}</td>
-                            <td>{{advert.damage}}</td>
-                            <td>{{advert.second_hand}}</td>
-                            <td>{{advert.warranty}}</td>
-                            <td>{{advert.exchange}}</td>
-                            <td class="align-middle">
-                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-info" >Click For Details</a>
-                            </td>
-                            <td class="text-right">
-                                <a href="{{url_for('editAdvert', id=advert.ad_no)}}" class="btn btn-outline-success" style="width:100px;" >Edit</a>
-                            </td>
-                            <td class="text-left">
-                                <a href="{{url_for('deleteAdvert', id=advert.ad_no)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-outline-danger" style="width:100px;" >Delete</a>
-                            </td>
-                        </tr>
-                    {%endfor%}
+                          </tr>
+                      {%endfor%}
                     </tbody>
                   </table>
 
