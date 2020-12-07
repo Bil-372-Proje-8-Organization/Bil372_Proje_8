@@ -3,6 +3,7 @@ import time
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from sqlalchemy import select,update, and_
+from sqlalchemy import func
 from datetime import datetime, date, timedelta
 #from flask_socketio import SocketIO, join_room, leave_room, send
 
@@ -292,7 +293,29 @@ def detailsAdvert(id):
         return redirect(url_for('login'))
     return render_template("detailsAdvert.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(ad_no=id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
+@app.route("/filter/", methods=['GET', 'POST'])
+def filter():
+    if request.method =='POST':
+        min_price= request.form['min_price']
+        max_price= request.form['max_price']
+        min_year= request.form['min_year']
+        max_year= request.form['max_year']
+        if request.form['min_price'] == '':
+           min_price=0
+        if request.form['max_price'] == '':
+           max_price=db.session.query(func.max(Advert.c.seller_price)).scalar()
+        if request.form['min_year'] == '':
+           min_year=1900
+        if request.form['max_year'] == '':
+           max_year=2022  
+        query = select([Advert]).where(and_(Advert.c.seller_price <= max_price, Advert.c.seller_price >= min_price))
+        adverts = conn.execute(query).fetchall()
+        query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['brand_model']))
+        vehicles = conn.execute(query).fetchall()    
+        return render_template("filteradminHome.html", username=current_user.username,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
 
+
+    return render_template('filter.html' , models=db.session.query(Model).all())
 
 if __name__ == "__main__":
     app.run(debug=True)

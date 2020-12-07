@@ -108,36 +108,26 @@
                         <tr>
                             {%for vehicle in vehicles%}
                                 {%if advert.vehicle_no == vehicle.vehicle_no%}
-                                <td>{{vehicle.brand_model}}</td>
+                                    <td>{{vehicle.brand_model}}</td>
+                                    <td>{{vehicle.transmission}}</td>
+                                    <td>{{vehicle.package}}</td>
+                                    <td>{{advert.color}}</td>
+                                    <td>{{advert.km}}</td>
+                                    <td>{{advert.second_hand}}</td>
+                                    <td>{{advert.seller_price}}</td>
+                                    {%for Users_info in Users_info%}
+                                        {%if Users_info.users_id == advert.seller_id%}
+                                            <td>{{Users_info.name}}</td>
+                                        {%endif%}
+                                    {%endfor%}
+                                    <td class="align-middle">
+                                        <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
+                                    </td>
                                 {%endif%}
                             {%endfor%}
 
-                            {%for vehicle in vehicles%}
-                                {%if advert.vehicle_no == vehicle.vehicle_no%}
-                                <td>{{vehicle.transmission}}</td>
-                                {%endif%}
-                            {%endfor%}
-
-                            {%for vehicle in vehicles%}
-                                {%if advert.vehicle_no == vehicle.vehicle_no%}
-                                <td>{{vehicle.package}}</td>
-                                {%endif%}
-                            {%endfor%}
-
-                            <td>{{advert.color}}</td>
-                            <td>{{advert.km}}</td>
-                            <td>{{advert.second_hand}}</td>
-                            <td>{{advert.seller_price}}</td>
                             
-                            {%for Users_info in Users_info%}
-                                {%if Users_info.users_id == advert.seller_id%}
-                                <td>{{Users_info.name}}</td>
-                                {%endif%}
-                            {%endfor%}
-
-                            <td class="align-middle">
-                              <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
-                            </td>
+                            
                         </tr>
                     {%endfor%}   
                     </tbody>
