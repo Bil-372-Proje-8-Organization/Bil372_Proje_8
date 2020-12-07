@@ -274,8 +274,8 @@ def detailsAdvert(id):
     if not current_user.is_authenticated:
         flash('Please login', 'danger')
         return redirect(url_for('login'))
+    return render_template("detailsAdvert.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(ad_no=id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
-    return render_template("detailsAdvert.html", id=current_user.id, rooms="",adverts=db.session.query(Advert).filter_by(ad_no=id).all())
 
 
 if __name__ == "__main__":
