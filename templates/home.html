@@ -85,19 +85,19 @@
                       <tr>
 
                           {%for vehicle in vehicles%}
-                            {%if advert.brand_model_no == vehicle.vehicle_no%}
-                              <td>{{vehicle.model_brand}}</td>
+                            {%if advert.vehicle_no == vehicle.vehicle_no%}
+                              <td>{{vehicle.brand_model}}</td>
                             {%endif%}
                           {%endfor%}
 
                           {%for vehicle in vehicles%}
-                            {%if advert.brand_model_no == vehicle.vehicle_no%}
+                            {%if advert.vehicle_no == vehicle.vehicle_no%}
                               <td>{{vehicle.transmission}}</td>
                             {%endif%}
                           {%endfor%}
 
                           {%for vehicle in vehicles%}
-                            {%if advert.brand_model_no == vehicle.vehicle_no%}
+                            {%if advert.vehicle_no == vehicle.vehicle_no%}
                               <td>{{vehicle.package}}</td>
                             {%endif%}
                           {%endfor%}
@@ -130,4 +130,6 @@
 
         
 {% endblock %}    
+
+
 
