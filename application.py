@@ -165,6 +165,17 @@ def newAdvert():
         'warranty': request.form['warranty'],
         'exchange': request.form['exchange'],
         }
+        seller_price = request.form['seller_price']
+        vehicle_no = request.form['brand_model']
+        tuples=db.session.query(Vehicle).filter_by(vehicle_no=vehicle_no).with_entities(Vehicle.c.dealer_price).first()
+
+        tuples_str = str(tuples)
+        tuples_str2 = tuples_str[1:len(tuples_str)-2]
+
+        if int(seller_price) > int(tuples_str2):
+            flash('It cannot be more expensive than the dealer price', 'danger')
+            return redirect(url_for('adverts'))
+
         query = Advert.insert().values(values)
         conn.execute(query)
         return redirect(url_for('adverts'))
