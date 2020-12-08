@@ -17,85 +17,26 @@
     }
     .filter-form form {
         margin-bottom: 10px;
-        background: #ffffff;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
         padding: 20px;
     }
     .filter-form h2 {
-        margin: 0 0 5 5px;
+        margin: 0 0 5px 5px;
     }
+    </style>
     
-    body{
-        background: #f7f7f7;
-    }
-    </style>  
 {% endblock %}
 {% block body %}
-    <!-- Flash error messages -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <p class="error text-center" style="margin-top:60px">{{ messages[0] }}</p>
-    {% endif %}
-    {% endwith %}
-            <!-- Nav bar start -->
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-                <div class="container-fluid">
-                    <div  class="cursor-pointer">
-                    
-                        </button>
-                        <i class="fas fa-home" style="margin-left:10px;"></i>
-                        <a href="{{url_for('home')}}" style="color: #335177"><span>Main Page</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        
-                        
-
-                    </div>
-
-                    <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Go to the profile page -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
-                            </li>
-                            
-                            <!-- Logout -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Nav bar end -->
-
             <!-- Main section start -->
-            <div class="filter-form" style="margin-top:80px;">
-                <h2 class="text-center" >Filter</h2>
-                <form action = "" method = "post" class="form-signin" >
-                    <div class="form-group" >
-                        <select class="form-control" name="brand"   autofocus >
-                            <option  selected value='empty'>All Brand</option>
-                            {% for brand in brands %}                                 
-                                <option >{{ brand }}</option>                                   
-                            {% endfor %}            
-                        </select>
-                    </div>
-
-                    <div class="form-group" >
-                        <select class="form-control" name="model"    >
-                            <option  selected value='empty'>All Model</option>
-                            {% for brand in brands %}
-                                <optgroup label="{{brand}}">
-                                    {% for vehicle in vehicles %}
-                                        {%if vehicle.brand_model.split("-")[0] == brand %}
-                                            <option >{{ vehicle.brand_model }}</option>
-                                        {%endif%}
-                                    {%endfor%}         
-                                </optgroup>
-                            {% endfor %}            
+            <div class="filter-form">
+                <h2 class="text-center">Filter</h2>
+                <form action = "" method = "post" class="form-signin">
+                    <div class="form-group">
+                        <select class="form-control" name="brand_model"  required="required" >
+                            <option disabled selected value="">Select a brand and model</option>
+                            {% for model in models %}
+                                <option >{{ model.brand_model }}</option> 
+                            {% endfor %}        
                         </select>
                     </div>
 
@@ -131,7 +72,7 @@
                         </div>
                     </div>
                        
-                    <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block">Filter</button>
+                    <button type="submit" name="submit" class="btn btn-lg btn-primary btn-block" style="margin-top: 20px;">Filter</button>
                 </form>
             </div>
             <!-- Main section end -->
