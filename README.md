@@ -4,10 +4,10 @@
    TBA
 
 ## Team
+Elif Nur AFSAR <br>
 Cenk Göktürk <br>
 Abdulkadir Özpolat <br>
 Atahan Ünal <br>
-Elif Nur Afşar <br>
 
 ### Downloading the code
 
