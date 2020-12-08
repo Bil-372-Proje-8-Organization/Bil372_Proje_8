@@ -1,5 +1,4 @@
-<!--Update and delete buttons will be added-->
-{% extends "base.html" %}
+{% extends "baseAdmin.html" %}
 {% block head %}   
     <title> Home </title>
     <style>
@@ -28,58 +27,9 @@
         <p class="error text-center">{{ messages[0] }}</p>
     {% endif %}
     {% endwith %}
-            <!-- Nav bar start -->
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-                <div class="container-fluid">
-                    <div  class="cursor-pointer">
-                        
-                        <i class="fas fa-plus"></i>
-                        <a href="{{url_for('addBrand')}}" style="color: #335177"><span>New Brand</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <i class="fas fa-plus" style="margin-left:10px;"></i>
-                        <a href="{{url_for('addVehicle')}}" style="color: #335177"><span>New Vehicle</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <i class="fas fa-list-alt" style="margin-left:10px;"></i>
-                        <a href="{{url_for('brands')}}" style="color: #335177"><span>All Brands</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <i class="fas fa-home" style="margin-left:10px;"></i>
-                        <a href="{{url_for('home')}}" style="color: #335177"><span>Main Page</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        
-                        
-
-                    </div>
-
-                    <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Go to the profile page -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
-                            </li>
-                            
-                            <!-- Logout -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Nav bar end -->
-
             <!-- Main section start -->
-            <div >
-                <table class="table table-hover" style="margin-top:50px;">
+            <div id="list-wrapper" class="card" style="margin: 0 auto;">
+                <table class="table table-hover" >
                     <thead>
                       <tr>
                         <th scope="col">Brand - Model </th>
