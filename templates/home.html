@@ -1,148 +1,91 @@
 {% extends "base.html" %}
-{% block head %}   
+{% block head %}
     <title> Home </title>
     <style>
         .error {
-        font-size:18px;
-        color:#cc0000; 
-        margin-top:30px
-    }
-    td {
-    text-align: center;
-    }
-    th {
-    text-align: center;
-    }
+            font-size: 18px;
+            color: #cc0000;
+            margin-top: 30px
+        }
 
-    .table td th {
-    text-align: center;
-    }
-        
-    body{
-        background: linear-gradient(to right, #e4ee5a, #1bcbdd)
-    }
-        
+        td {
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .table td th {
+            text-align: center;
+        }
+
+        /*background-color: #EBEDFF;*/
     </style>
-    
+
 {% endblock %}
 {% block body %}
-    <!-- Flash error messages -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <p class="error text-center">{{ messages[0] }}</p>
-    {% endif %}
-    {% endwith %}
-            <!-- Nav bar start -->
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-                <div class="container-fluid">
-                    <div  class="cursor-pointer">
-                        <!-- Add a new ad -->
-                        <i class="fas fa-plus"></i>
-                        <a href="{{ url_for('newAdvert') }}" style="color: #335177"><span>New advert</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+    <!-- Main section start -->
+    <div id="list-wrapper" class="card" style="margin: 0 auto;">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Package</th>
+                <th scope="col">Transmission</th>
 
-                        <!-- User's own ads -->
-                        <i class="fas fa-car" style="margin-left:10px;"></i>
-                        <a href="{{ url_for('your_adverts') }}" style="color: #335177"><span>Your adverts</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        {%if filter %}
-                            <i class="fas fa-home" style="margin-left:10px;"></i>
-                            <a href="{{url_for('home')}}" style="color: #335177"><span>Main Page</span></a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                        {%endif%}
+                <th scope="col">Color</th>
+                <th scope="col">Km</th>
+                <th scope="col">Year</th>
 
-                    </div>
+                <th scope="col">Price</th>
+                <th scope="col">Seller</th>
 
-                    <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Go to the profile page -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('profile') }}"><span style="color: #335177">Profile</span></a>
-                            </li>
-                            <li class="nav-item">
-                              <a  class="nav-link" href="{{ url_for('filter') }}"><span style="color: #335177">Filter</span></a>
-                          </li>
-                            <!-- Logout -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Nav bar end -->
+                <th scope="col">Date of advert</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for advert in adverts %}
+                <tr>
 
-            <!-- Main section start -->
-            <div >
-              {%if filter %}
-              <h2 class="text-center" style="margin-top:50px; font-family: 'Stencil Std',  fantasy";>Active Adverts By filter</h2>
-              {%else%}
-              <h2 class="text-center" style="margin-top:50px; font-family: 'Stencil Std',  fantasy";>Active Adverts</h2>
-              {%endif%}                <table class="table table-hover" >
-                  <thead>
-                    <tr>
-                      <th scope="col">Model</th>
-                      <th scope="col">Package</th>
-                      <th scope="col">Transmission</th>
+                    {% for vehicle in vehicles %}
+                        {% if advert.vehicle_no == vehicle.vehicle_no %}
+                            <td>{{ vehicle.brand_model }}</td>
+                            <td>{{ vehicle.package }}</td>
+                            <td>{{ vehicle.transmission }}</td>
 
-                      <th scope="col">Color</th>
-                      <th scope="col">Km</th>
-                      <th scope="col">Year</th>
-
-                      <th scope="col">Price</th>
-                      <th scope="col">Seller</th>
-
-                      <th scope="col">Date of advert</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {%for advert in adverts%}
-                      <tr>
-
-                        {%for vehicle in vehicles%}
-                          {%if advert.vehicle_no == vehicle.vehicle_no%}
-                            <td>{{vehicle.brand_model}}</td>
-                            <td>{{vehicle.package}}</td>
-                            <td>{{vehicle.transmission}}</td>
-
-                            <td>{{advert.color}}</td>
-                            <td>{{advert.km}}</td>
-                            <td>{{vehicle.year}}</td>
+                            <td>{{ advert.color }}</td>
+                            <td>{{ advert.km }}</td>
+                            <td>{{ vehicle.year }}</td>
 
 
-                            <td>{{advert.seller_price}}</td>
-                            {%for Users_info in Users_info%}
-                                {%if Users_info.users_id == advert.seller_id%}
-                                    <td>{{Users_info.name}}</td>
-                                {%endif%}
-                            {%endfor%}
+                            <td>{{ advert.seller_price }}</td>
+                            {% for Users_info in Users_info %}
+                                {% if Users_info.users_id == advert.seller_id %}
+                                    <td>{{ Users_info.name }}</td>
+                                {% endif %}
+                            {% endfor %}
 
-                            <td>{{advert.ad_date}}</td>
-                          
+                            <td>{{ advert.ad_date }}</td>
+
                             <td class="align-middle">
-                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}" class="btn btn-outline-success" >Click For Details</a>
+                                <a href="{{ url_for('detailsAdvert',id=advert.ad_no) }}"
+                                   class="btn btn-outline-success">Click For Details</a>
                             </td>
-                          {%endif%}
-                        {%endfor%}
-                      </tr>
-                  {%endfor%}
-                  </tbody>
-                </table>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Main section end -->
 
-            </div>
-            <!-- Main section end -->
-
-        <!-- Get username 
+    <!-- Get username
         <span id="get-username">{{ username }}</span>
         -->
 
-        
+
 {% endblock %}    
 
 
