@@ -1,4 +1,8 @@
-{% extends "base.html" %}
+{%if current_user.username == 'admin' %}
+    {% extends "baseAdmin.html" %}
+{%else%}
+    {% extends "base.html" %}  
+{%endif%}     
 {% block head %}
     <title> Profile </title>
     <style>     
