@@ -17,7 +17,7 @@
     }
     .filter-form form {
         margin-bottom: 10px;
-        background: linear-gradient(to right, #8eedf5a, #040fd7);
+        background: linear-gradient(to right, #8eedf5, #040fd7);
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 20px;
     }
@@ -77,11 +77,17 @@
                 <h2 class="text-center" style="background: linear-gradient(to right, #8beabe, #040fd7)">Filter</h2>
                 <form action = "" method = "post" class="form-signin" style="background: linear-gradient(to right, #8beabe, #040fd7)">
                     <div class="form-group" style="background: linear-gradient(to right, #8beabe, #040fd7)">
-                        <select class="form-control" name="brand_model"  required="required" >
+                        <select class="form-control" name="brand_model"  required="required" autofocus >
                             <option disabled selected value="">Select a brand and model</option>
-                            {% for model in models %}
-                                <option >{{ model.brand_model }}</option> 
-                            {% endfor %}        
+                            {% for brand in brands %}
+                                <optgroup label="{{brand}}">
+                                    {% for vehicle in vehicles %}
+                                        {%if vehicle.brand_model.split("-")[0] == brand %}
+                                            <option >{{ vehicle.brand_model }}</option>
+                                        {%endif%}
+                                    {%endfor%}         
+                                </optgroup>
+                            {% endfor %}            
                         </select>
                     </div>
 

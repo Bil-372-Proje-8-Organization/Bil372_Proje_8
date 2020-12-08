@@ -338,8 +338,9 @@ def filter():
         else:
             return render_template("Home.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
 
-
-    return render_template('filter.html' , models=db.session.query(Model).all())
+    tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+    brands = [x[0] for x in tuples]
+    return render_template('filter.html' , vehicles=db.session.query(Vehicle).all(), brands=brands)
 
 if __name__ == "__main__":
     app.run(debug=True)
