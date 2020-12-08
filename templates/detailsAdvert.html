@@ -45,59 +45,12 @@
 
 {% endblock %}
 {% block body %}
-    <!-- Flash error messages -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <p class="error text-center">{{ messages[0] }}</p>
-    {% endif %}
-    {% endwith %}
-
-
-            <!-- Nav bar start -->
-            <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
-                <div class="container-fluid">
-                    <div  class="cursor-pointer">
-                        <!-- Add a new ad -->
-                        <i class="fas fa-plus"></i>
-                        <a href="{{ url_for('newAdvert') }}" style="color: #335177"><span>New advert</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <!-- User's own ads -->
-                        <i class="fas fa-car" style="margin-left:10px;"></i>
-                        <a href="{{ url_for('your_adverts') }}" style="color: #335177"><span>Your adverts</span></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Go to the home screen -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('home') }}"><span style="color: #335177">Home</span></a>
-                            </li>
-
-                            <!-- Logout -->
-                            <li class="nav-item">
-                                <a  class="nav-link" href="{{ url_for('logout') }}"><span style="color: #335177">Logout</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Nav bar end -->
-
-
           <tbody>
 
 
             <!-- Main section start -->
-            <div style=" background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7));
-        background: linear-gradient(to right, #8beabe, #040fd7)">
-                <table class="table table-hover" style="margin-top:60px; margin-bottom:0px; background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-        background: linear-gradient(to right, #ee5a6f, #f29263)" >
+            <div style="margin: 0 auto">
+                <table class="table table-hover" style="margin: 0 auto;" >
 
                   {%for advert in adverts%}
           <tr>
