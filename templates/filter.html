@@ -1,5 +1,8 @@
-<!--Update and delete buttons will be added-->
-{% extends "base.html" %}
+{%if current_user.username == 'admin' %}
+    {% extends "baseAdmin.html" %}
+{%else%}
+    {% extends "base.html" %}  
+{%endif%}       
 {% block head %}
 <style>
     .error {
@@ -29,16 +32,31 @@
 {% block body %}
             <!-- Main section start -->
             <div class="filter-form">
-                <h2 class="text-center">Filter</h2>
-                <form action = "" method = "post" class="form-signin">
-                    <div class="form-group">
-                        <select class="form-control" name="brand_model"  required="required" >
-                            <option disabled selected value="">Select a brand and model</option>
-                            {% for model in models %}
-                                <option >{{ model.brand_model }}</option> 
-                            {% endfor %}        
+                <h2 class="text-center" >Filter</h2>
+                <form action = "" method = "post" class="form-signin" >
+                    <div class="form-group" >
+                        <select class="form-control" name="brand"   autofocus >
+                            <option  selected value='empty'>All Brand</option>
+                            {% for brand in brands %}                                 
+                                <option >{{ brand }}</option>                                   
+                            {% endfor %}            
                         </select>
                     </div>
+
+                    <div class="form-group" >
+                        <select class="form-control" name="model"    >
+                            <option  selected value='empty'>All Model</option>
+                            {% for brand in brands %}
+                                <optgroup label="{{brand}}">
+                                    {% for vehicle in vehicles %}
+                                        {%if vehicle.brand_model.split("-")[0] == brand %}
+                                            <option >{{ vehicle.brand_model }}</option>
+                                        {%endif%}
+                                    {%endfor%}         
+                                </optgroup>
+                            {% endfor %} 
+                         </select>   
+                    </div>                   
 
 
                     <label style="font-size:15px;"> Price </label>
