@@ -356,18 +356,40 @@ def filter():
         if request.form['min_km'] == '':
            min_km=0
         if request.form['max_km'] == '':
-           max_km=1000000
+           max_km=db.session.query(func.max(Advert.c.km)).scalar()
+         
         query = select([Advert]).where(and_(Advert.c.seller_price <= max_price, Advert.c.seller_price >= min_price, Advert.c.km <= max_km, Advert.c.km>= min_km))
         adverts = conn.execute(query).fetchall()
-        query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['brand_model']))
+
+        if (request.form['brand'] == 'empty' and request.form['model'] == 'empty'):
+            query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year))
+        elif (request.form['brand'] != 'empty' and request.form['model'] == 'empty'):
+            tuples=db.session.query(Vehicle.c.brand_model).distinct(Vehicle.c.brand_model).all()
+            all = [x[0] for x in tuples]
+            #all=conn.execute(select([Vehicle])).fetchall()
+            vehicles=[]
+            for one in all:
+                if one.split('-')[0] == request.form['brand']:
+                    query=select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model==one ))
+                    vehicles += conn.execute(query).fetchall()
+            return render_template("adminHome.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+        elif (request.form['brand'] == 'empty' and request.form['model'] != 'empty'):
+            query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['model'] ))
+        else:
+            if   request.form['model'].split('-')[0] != request.form['brand']:
+                flash('Model and brand must match', 'danger')
+                return redirect(url_for('filter'))
+            query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['model'] ))    
         vehicles = conn.execute(query).fetchall()
+
         if current_user.username == 'admin':    
             return render_template("adminHome.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
         else:
             return render_template("Home.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
 
-
-    return render_template('filter.html' , models=db.session.query(Model).all())
+    tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
+    brands = [x[0] for x in tuples]
+    return render_template('filter.html' , vehicles=db.session.query(Vehicle).all(), brands=brands)
 
 if __name__ == "__main__":
     app.run(debug=True)
