@@ -1,12 +1,12 @@
 # Bil 372 - Project
 
 ## Description
-   TBA
+Kazıklan-ma is a car selling website, designed to eliminate price hike of pre-owned vehicles. To do so, it prevents sellers from putting higher price tags than the ones in the official price lists. Furthermore, buyers are shown with average and dealer prices for each car alongside the seller price.
 
 ## Team
-Cenk Göktürk <br>
 Abdulkadir Özpolat <br>
 Atahan Ünal <br>
+Cenk Göktürk <br>
 Elif Nur Afşar <br>
 
 ### Downloading the code
