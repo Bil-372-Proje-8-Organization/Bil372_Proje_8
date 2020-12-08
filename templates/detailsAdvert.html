@@ -116,20 +116,20 @@
                     <td>{{vehicle.transmission}}</td>
                   </tr>
                   <tr>
-                      <th scope="col">Drive-train</th>
+                      <th scope="col">Drive-Train</th>
                       <td>{{vehicle.drive_train}}</td>
                   </tr>
                   <tr>
                       <th scope="col">Engine Size</th>
-                      <td>{{vehicle.engine_size}}</td>
+                      <td>{{vehicle.engine_size}} cc</td>
                   </tr>
                   <tr>
-                      <th scope="col">Cyclinder Num</th>
+                      <th scope="col">Cyclinder Number</th>
                       <td>{{vehicle.num_cylinder}}</td>
                   </tr>
                   <tr>
                       <th scope="col">Power</th>
-                      <td>{{vehicle.power}}</td>
+                      <td>{{vehicle.power}} hp</td>
                   </tr>
 
 
@@ -162,11 +162,21 @@
 
                   <tr>
                        <th scope="col">Seller Price</th>
-                      <td>{{advert.seller_price}}</td>
+                      <td>{{advert.seller_price}} TL</td>
                   </tr>
                   <tr>
                       <th scope="col">Dealer Price</th>
-                      <td>{{vehicle.dealer_price}}</td>
+                      <td>{{vehicle.dealer_price}} TL</td>
+                  </tr>
+                  <tr>
+                    {% set average = [] %}
+                    {% for outAdvert in allAdverts %}
+                        {% if outAdvert.vehicle_no == vehicle.vehicle_no %}
+                            {% if average.append(outAdvert) %}{% endif %}
+                        {% endif %}
+                    {% endfor %}
+                      <th scope="col">Average Price</th>
+                      <td>{{ averagePrice }} TL</td>
                   </tr>
 
                 {%for Users_info in Users_info%}

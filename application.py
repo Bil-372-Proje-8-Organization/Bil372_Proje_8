@@ -172,6 +172,31 @@ def newAdvert():
     brands = [x[0] for x in tuples]
     return render_template("newAdvert.html", id=current_user.id, vehicles=db.session.query(Vehicle).all(), brands=brands)
 
+@app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
+def detailsAdvert(id):
+    if not current_user.is_authenticated:
+        flash('Please login', 'danger')
+        return redirect(url_for('login'))
+    vehicle_no = db.session.query(Advert).filter_by(ad_no=id).with_entities(Advert.c.vehicle_no).first()
+    vehicle_no_str = str(vehicle_no)
+    vehicle_no_str = vehicle_no_str[1:len(vehicle_no_str) - 2]
+
+    tuples = db.session.query(Advert).filter_by(vehicle_no=int(vehicle_no_str)).with_entities(
+        Advert.c.seller_price).all()
+
+    seller_prices = []
+
+    for x in tuples:
+        x = str(x)
+        x = x[1:len(x) - 2]
+        x = int(x)
+        seller_prices.append(x)
+
+    average = sum(seller_prices) / len(seller_prices)
+
+    return render_template("detailsAdvert.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(ad_no=id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all(), averagePrice=average)
+
+
 @app.route("/sellers_adverts/<int:id>", methods=['GET', 'POST'])
 def sellers_adverts(id):
     if not current_user.is_authenticated:
@@ -299,14 +324,6 @@ def editVehicle(no):
     tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
     brands = [x[0] for x in tuples]
     return render_template('editVehicle.html', vehicle=vehicle , models=db.session.query(Model).all(), brands=brands)
-
-
-@app.route("/detailsAdvert/<int:id>", methods=['GET', 'POST'])
-def detailsAdvert(id):
-    if not current_user.is_authenticated:
-        flash('Please login', 'danger')
-        return redirect(url_for('login'))
-    return render_template("detailsAdvert.html", id=current_user.id,  adverts=db.session.query(Advert).filter_by(ad_no=id).all(), Users_info=db.session.query(Users_info).all(), vehicles=db.session.query(Vehicle).all())
 
 @app.route("/filter/", methods=['GET', 'POST'])
 def filter():
