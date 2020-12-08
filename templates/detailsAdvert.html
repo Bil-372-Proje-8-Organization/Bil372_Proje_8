@@ -1,149 +1,105 @@
 {% extends "base.html" %}
 {% block head %}
     <title> detailsAdvert </title>
-    <style>
-    .error {
-        font-size:18px;
-        color:#cc0000;
-        margin-top:30px
-    }
-
-    .bg-c-lite-green {
-        background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
-         background: linear-gradient(to right, #8beabe, #040fd7)
-    }
-    nav{
-         background: -webkit-gradient(linear, left top, right top, from(#8beabe), to(#040fd7);
-         background: linear-gradient(to right, #8beabe, #040fd7)
-    }
-    table {
-        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-        background: linear-gradient(to right, #ee5a6f, #f29263)
-    }
-    td {
-    text-align: center;
-        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-        background: linear-gradient(to right, #ee5a6f, #f29263)
-    }
-    th {
-        text-align: center;
-        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-        background: linear-gradient(to right, #ee5a6f, #f29263)
-    }
-
-    div {
-        padding: 25px 50px 75px 100px;
-    }
-
-    .table td th {
-        background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-        background: linear-gradient(to right, #ee5a6f, #f29263)
-        text-align: center;
-    }
-
-    </style>
-
 {% endblock %}
 {% block body %}
           <tbody>
-
-
             <!-- Main section start -->
             <div style="margin: 0 auto">
                 <table class="table table-hover" style="margin: 0 auto;" >
 
-                  {%for advert in adverts%}
+        {%for advert in adverts%}
           <tr>
-            {%for vehicle in vehicles%}
-              {%if advert.vehicle_no == vehicle.vehicle_no%}
-                  <tr>
-                    <th scope="col">Model</th>
-                    <td>{{vehicle.brand_model}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="col">Package</th>
-                    <td>{{vehicle.package}}</td>
-                  </tr>
-                  <tr>
-                    <th scope="col">Transmission</th>
-                    <td>{{vehicle.transmission}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Drive-Train</th>
-                      <td>{{vehicle.drive_train}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Engine Size</th>
-                      <td>{{vehicle.engine_size}} cc</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Cyclinder Number</th>
-                      <td>{{vehicle.num_cylinder}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Power</th>
-                      <td>{{vehicle.power}} hp</td>
-                  </tr>
-
-
-                  <tr>
-                      <th scope="col">Color</th>
-                      <td>{{advert.color}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Km</th>
-                      <td>{{advert.km}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Year</th>
-                      <td>{{vehicle.year}}</td>
-                  </tr>
-
-
-                  <tr>
-                      <th scope="col">Damage</th>
-                      <td>{{advert.damage}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Warranty</th>
-                      <td>{{advert.warranty}}</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Exchange</th>
-                      <td>{{advert.exchange}}</td>
-                  </tr>
-
-                  <tr>
-                       <th scope="col">Seller Price</th>
-                      <td>{{advert.seller_price}} TL</td>
-                  </tr>
-                  <tr>
-                      <th scope="col">Dealer Price</th>
-                      <td>{{vehicle.dealer_price}} TL</td>
-                  </tr>
-                  <tr>
-                    {% set average = [] %}
-                    {% for outAdvert in allAdverts %}
-                        {% if outAdvert.vehicle_no == vehicle.vehicle_no %}
-                            {% if average.append(outAdvert) %}{% endif %}
-                        {% endif %}
-                    {% endfor %}
-                      <th scope="col">Average Price</th>
-                      <td>{{ averagePrice }} TL</td>
-                  </tr>
-
-                {%for Users_info in Users_info%}
-                    {%if Users_info.users_id == advert.seller_id%}
+                {%for vehicle in vehicles%}
+                    {%if advert.vehicle_no == vehicle.vehicle_no%}
                         <tr>
-                           <th scope="col">Seller name</th>
-                          <td>{{Users_info.name}}-{{Users_info.surname}}</td>
+                            <th scope="col">Model</th>
+                            <td>{{vehicle.brand_model}}</td>
                         </tr>
                         <tr>
-                          <th scope="col">Phone</th>
-                          <td>{{Users_info.phone}}</td>
+                            <th scope="col">Package</th>
+                            <td>{{vehicle.package}}</td>
                         </tr>
-                    {%endif%}
-                {%endfor%}
+                        <tr>
+                            <th scope="col">Transmission</th>
+                            <td>{{vehicle.transmission}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Drive-Train</th>
+                            <td>{{vehicle.drive_train}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Engine Size</th>
+                            <td>{{vehicle.engine_size}} cc</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Cyclinder Number</th>
+                            <td>{{vehicle.num_cylinder}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Power</th>
+                            <td>{{vehicle.power}} hp</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="col">Color</th>
+                            <td>{{advert.color}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Km</th>
+                            <td>{{advert.km}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Year</th>
+                            <td>{{vehicle.year}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <th scope="col">Damage</th>
+                            <td>{{advert.damage}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Warranty</th>
+                            <td>{{advert.warranty}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Exchange</th>
+                            <td>{{advert.exchange}}</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="col">Seller Price</th>
+                            <td>{{advert.seller_price}} TL</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Dealer Price</th>
+                            <td>{{vehicle.dealer_price}} TL</td>
+                        </tr>
+                        <tr>
+                            {% set average = [] %}
+                            {% for outAdvert in allAdverts %}
+                                {% if outAdvert.vehicle_no == vehicle.vehicle_no %}
+                                    {% if average.append(outAdvert) %}{% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            <th scope="col">Average Price</th>
+                            <td>{{ averagePrice }} TL</td>
+                        </tr>
+
+                    {%for Users_info in Users_info%}
+                        {%if Users_info.users_id == advert.seller_id%}
+                            <tr>
+                            <th scope="col">Seller name</th>
+                            <td>{{Users_info.name}}-{{Users_info.surname}}</td>
+                            </tr>
+                            <tr>
+                            <th scope="col">Phone</th>
+                            <td>{{Users_info.phone}}</td>
+                            </tr>
+                        {%endif%}
+                    {%endfor%}
                 <tr>
                   <th scope="col">Date of advert</th>
                   <td>{{advert.ad_date}}</td>
@@ -154,16 +110,10 @@
               {%endif%}
             {%endfor%}
           </tr>
-      {%endfor%}
+        {%endfor%}
                 </table>
             </div>
             <!-- Main section end -->
-
-        <!-- Get username
-        <span id="get-username">{{ username }}</span>
-        -->
-
-
 {% endblock %}
 
 
