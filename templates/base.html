@@ -54,11 +54,14 @@
                     Your Adverts
                 </a>
             </li>
-            {% if filter %}
+            
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}">Main Page</a>
+                    <a class="nav-link" href="{{ url_for('home') }}">
+                        <i class="fas fa-home"></i>
+                        Main Page
+                    </a>
                 </li>
-            {% endif %}
+            
         </ul>
 
         {#
@@ -70,16 +73,14 @@
                 <!-- User's own ads -->
                 <i class="fas fa-car" style="margin-left:10px;"></i>
                 <a href="{{ url_for('your_adverts') }}" style="color: #335177"><span>Your adverts</span></a>
-
-                {% if filter %}
+              
                     <i class="fas fa-home" style="margin-left:10px;"></i>
                     <a href="{{ url_for('home') }}" style="color: #335177"><span>Main Page</span></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
-                {% endif %}
+                    </button>}
             </div>
             #}
 

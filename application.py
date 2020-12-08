@@ -372,7 +372,7 @@ def filter():
                 if one.split('-')[0] == request.form['brand']:
                     query=select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model==one ))
                     vehicles += conn.execute(query).fetchall()
-            return render_template("adminHome.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+            return render_template("adminHome.html",  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
         elif (request.form['brand'] == 'empty' and request.form['model'] != 'empty'):
             query = select([Vehicle]).where(and_(Vehicle.c.year <= max_year, Vehicle.c.year >= min_year, Vehicle.c.brand_model == request.form['model'] ))
         else:
@@ -383,9 +383,9 @@ def filter():
         vehicles = conn.execute(query).fetchall()
 
         if current_user.username == 'admin':    
-            return render_template("adminHome.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+            return render_template("adminHome.html", adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
         else:
-            return render_template("Home.html", filter=True,  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
+            return render_template("Home.html",  adverts=adverts, Users_info=db.session.query(Users_info).all(), vehicles=vehicles)
 
     tuples=db.session.query(Model.c.brand_name).distinct(Model.c.brand_name).all()
     brands = [x[0] for x in tuples]
