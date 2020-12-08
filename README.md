@@ -1,7 +1,8 @@
 # Bil 372 - Project
 
 ## Additional Note
-In order to pull the most recent version, write pull from 'reverted' branch
+In order to pull the most recent version, write pull from 'reverted' branch by writing the following command
+git pull origin reverted
 
 ## Description
 Kazıklan-ma is a car selling website, designed to eliminate price hike of pre-owned vehicles. To do so, it prevents sellers from putting higher price tags than the ones in the official price lists. Furthermore, buyers are shown with average and dealer prices for each car alongside the seller price.
